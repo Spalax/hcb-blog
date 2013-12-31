@@ -1,4 +1,4 @@
-husky-translations
+husky-blog
 ==================
 
 Plugin
