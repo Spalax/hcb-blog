@@ -1,5 +1,5 @@
 {
-    "name": "huskycms/husky-translations-backend",
+    "name": "huskycms/hcb-blog",
     "type": "huskycms-backend-plugin",
     "description": "Blog managing plugin for backend area of the HuskyCMS",
     "authors": [
