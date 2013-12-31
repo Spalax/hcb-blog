@@ -1,6 +1,7 @@
 {
     "name": "huskycms/husky-translations-backend",
-    "description": "huskycms plugin",
+    "type": "huskycms-backend-plugin",
+    "description": "Blog managing plugin for backend area of the HuskyCMS",
     "authors": [
         {
             "name": "Mylotskyi Oleksii",
@@ -9,11 +10,16 @@
     ],
 
     "keywords": [
-        "utils"
+        "huskycms", "plugin", "module"
     ],
-
     "license": "MIT",
-
+    "homepage": "http://huskycms.com/hcb-blog",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://spalax:spalax@packages.milsdev.com"
+        }
+    ],
     "require-dev": {
         "phpunit/PHPUnit": "3.7.*"
     },
