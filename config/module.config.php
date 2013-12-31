@@ -23,5 +23,18 @@ return array(
         )
     ),
 
-    'di' => include __DIR__ . '/module/di.config.php'
+    'di' => include __DIR__ . '/module/di.config.php',
+
+    'huskycms' => array(
+        'hc-backend'=> array(
+            'packages' => array(
+                'hcb-blog' => array(
+                    'js'=>array(
+                        'type'=>'content',
+                        'http_path'=>'/js/src/hcb-blog'
+                    )
+                )
+            )
+        )
+    )
 );
