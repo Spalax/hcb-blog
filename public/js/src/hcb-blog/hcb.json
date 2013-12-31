@@ -1,0 +1,7 @@
+{
+    "route": "/blog",
+    "modules": [{
+        "route": "",
+        "module": "posts/list/Container"
+    }]
+}
