@@ -1,0 +1,41 @@
+{
+    "name": "huskycms/husky-translations-backend",
+    "description": "huskycms plugin",
+    "authors": [
+        {
+            "name": "Mylotskyi Oleksii",
+            "email": "spalaxinco@gmail.com"
+        }
+    ],
+
+    "keywords": [
+        "utils"
+    ],
+
+    "license": "MIT",
+
+    "require-dev": {
+        "phpunit/PHPUnit": "3.7.*"
+    },
+
+    "require": {
+        "php": ">=5.3",
+        "zendframework/zendframework": ">=2.0.0",
+        "spalax/zf2-libs": "dev-master",
+        "doctrine/doctrine-module": "0.*",
+        "doctrine/doctrine-orm-module": "0.*",
+        "doctrine/migrations": "v1.0-ALPHA1",
+        "rwoverdijk/assetmanager": "1.3.5"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "HcbBlog": "src/"
+        },
+
+        "classmap": [
+            "./Module.php"
+        ]
+    },
+    "minimum-stability": "dev"
+}
