@@ -1,9 +1,10 @@
 <?php
-namespace HcbBlog\Stdlib\Extractor\Blog\Posts\Post;
+namespace HcbBlog\Stdlib\Extractor\Posts\Post;
 
 use Zf2Libs\Stdlib\Extractor\ExtractorInterface;
 use Zf2Libs\Stdlib\Extractor\Exception\InvalidArgumentException;
 use HcbBlog\Entity\Post as PostEntity;
+use HcbBlog\Entity\Post\Data as PostDataEntity;
 
 class Extractor implements ExtractorInterface
 {
@@ -20,20 +21,27 @@ class Extractor implements ExtractorInterface
             throw new InvalidArgumentException("Expected HcbBlog\\Entity\\Post object, invalid object given");
         }
 
-        $updatedTimestamp = $post->getUpdatedTimestamp();
         $createdTimestamp = $post->getCreatedTimestamp();
 
-        if ($updatedTimestamp) {
-            $updatedTimestamp = $updatedTimestamp->format('Y-m-d H:i:s');
-        }
         if ($createdTimestamp) {
             $createdTimestamp = $createdTimestamp->format('Y-m-d H:i:s');
         }
 
+        $filtrated = $post->getData()->filter(function (PostDataEntity $entity) {
+            if ($entity->getLang() == 'ru') {
+                return true;
+            }
+        });
+
+        if ($filtrated->count() < 1) {
+            $dataEntity = $post->getData()->slice(0,1);
+            $dataEntity = array_pop($dataEntity);
+        } else {
+            $dataEntity = $filtrated->current();
+        }
+
         return array('id'=>$post->getId(),
-                     'title'=>$post->getTitle(),
-                     'content'=>$post->getContent(),
-                     'updatedTimestamp'=>$updatedTimestamp,
+                     'title'=>$dataEntity->getTitle(),
                      'createdTimestamp'=>$createdTimestamp);
     }
 }

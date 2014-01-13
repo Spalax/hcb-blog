@@ -8,7 +8,6 @@ define([
     return declare("BlogPackage", [ _Package ], {
         // summary:
         //      Clients package will provide user to manage web site clients
-        defaultRoute: '/blog',
         title: translation['packageTitle']
     });
 });

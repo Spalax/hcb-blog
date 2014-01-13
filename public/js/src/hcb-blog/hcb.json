@@ -1,7 +1,13 @@
 {
-    "route": "/blog",
+    "route": "/blog/posts",
     "modules": [{
         "route": "",
         "module": "posts/list/Container"
+    }, {
+        "route": "/create",
+        "module": "posts/create/Container"
+    }, {
+        "route": "/update/:id",
+        "module": "posts/update/Container"
     }]
 }

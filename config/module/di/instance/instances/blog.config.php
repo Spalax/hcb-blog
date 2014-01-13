@@ -1,32 +1,25 @@
 <?php
 return array(
-    'Collection-Blog-Posts-Post' => array(
+    'Collection-Blog-Posts' => array(
         'parameters' => array(
-            'fetchService' => 'HcbTranslations\Service\Blog\Posts\Post\FetchService',
-            'extractor' => 'HcbTranslations\Stdlib\Extractor\Blog\Posts\Post\Extractor'
+            'paginatorDataFetchService' => 'HcbBlog\Service\Posts\FetchQbBuilderService',
+            'extractor' => 'HcbBlog\Stdlib\Extractor\Posts\Post\Extractor'
         )
     ),
 
-    'Collection-Blog-Posts-List' => array(
+    'Collection-Blog-Post-Create' => array(
         'parameters' => array(
-            'paginatorDataFetchService' => 'HcbTranslations\Service\Blog\Posts\FetchQbBuilderService',
-            'extractor' => 'HcbTranslations\Stdlib\Extractor\Blog\Posts\Post\Extractor'
-        )
-    ),
-
-    'Collection-Blog-Posts-Create' => array(
-        'parameters' => array(
-            'inputData' => 'HcbTranslations\Data\Blog\Posts\Create',
-            'serviceCommand' => 'HcbTranslations\Service\Blog\Posts\CreateCommand',
+            'serviceCommand' => 'HcbBlog\Service\Posts\CreateService',
             'jsonResponseModelFactory' => 'Zf2Libs\View\Model\Json\Specific\StatusMessageDataModelFactory'
         )
     ),
 
-    'Collection-Blog-Posts-Post-Delete' => array(
+    'Collection-Blog-Post-Data-Create' => array(
         'parameters' => array(
-            'fetchService' => 'HcbTranslations\Service\Blog\Posts\Post\FetchService',
-            'serviceCommand' => 'HcbTranslations\Service\Blog\Posts\Post\DeleteCommand',
-            'jsonResponseModelFactory' => 'Zf2Libs\View\Model\Json\Specific\StatusMessageDataModelFactory'
+            'inputData' => 'HcbBlog\Data\Posts\Post\Data\Create',
+            'fetchService' => 'HcbBlog\Service\Posts\Post\FetchService',
+            'serviceCommand' => 'HcbBlog\Service\Posts\Post\CreateCommand',
+            'jsonResponseModelFactory' => 'Zf2Libs\View\Model\Uploader\Specific\StatusMessageDataModelFactory'
         )
     )
 );

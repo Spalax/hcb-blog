@@ -1,5 +1,5 @@
 <?php
-namespace HcbTranslations\Service\Blog\Posts;
+namespace HcbBlog\Service\Posts;
 
 use HcBackend\Service\FetchQbBuilderServiceInterface;
 use HcBackend\Service\Sorting\SortingServiceInterface;

@@ -1,40 +1,34 @@
 define([
     "dojo/_base/declare",
     "dojo/_base/lang",
-    "hcb-clients/store/Clients",
-    "dojo/store/Observable", 
-    "dojo/store/Cache",
-    "dojo/store/Memory",
+    "hcb-blog/store/Posts",
     "dgrid/OnDemandGrid",
-    "dojo/dom-style",
     "dgrid/extensions/ColumnHider",
     "dgrid/extensions/ColumnResizer",
     "dgrid/extensions/DijitRegistry",
-    '../../../../../../../../hc-backend/public/js/src/hc-backend/dgrid/_Selection',
+    "hc-backend/dgrid/_Selection",
+    "hc-backend/dgrid/columns/timestamp",
+    "hc-backend/dgrid/columns/editor",
     "dgrid/Keyboard",
     "dgrid/selector",
-    "dojo/i18n!../../nls/List"
-], function(declare, lang, ClientsStore, Observable, Cache, Memory,
-            OnDemandGrid, domStyle, ColumnHider, ColumnResizer, DijitRegistry,
-            _Selection, Keyboard, selector, translation) {
+    "dojo/i18n!../../../nls/List"
+], function(declare, lang, PostsStore,
+            OnDemandGrid, ColumnHider, ColumnResizer, DijitRegistry,
+            _Selection, timestamp, editor, Keyboard, selector, translation) {
     
     return declare([ OnDemandGrid, ColumnHider, ColumnResizer,
                      Keyboard, _Selection, DijitRegistry ], {
         //  summary:
         //      Grid widget for displaying all available clients
         //      as list
-        store: ClientsStore,
+        store: PostsStore,
 
         columns: [
             selector({ label: "", width: 40, selectorType: "checkbox" }),
-            {label: translation['labelId'], field: 'id', hidden: true,
-             sortable: true, resizable: false},
-            {label: translation['labelUsername'], field: 'username', hidden: true,
-             resizable: true},
-            {label: translation['labelState'], field: 'state', resizable: true},
-            {label: translation['labelFullName'], field: 'fullname',
-             route: 'edit/:id',
-             resizable: true}
+            {label: translation['labelId'], hidden: true, field: 'id', sortable: true, resizable: false},
+            editor({label: translation['labelTitle'], field: 'title', hidden: false,
+                    sortable: true, resizable: true, route: '/update/:id'}),
+            timestamp({label: translation['labelCreatedTimestamp'], field: 'createdTimestamp', sortable: true})
         ],
 
         loadingMessage: translation['loadingMessage'],

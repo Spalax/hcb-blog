@@ -28,6 +28,7 @@
         "php": ">=5.3",
         "zendframework/zendframework": ">=2.0.0",
         "spalax/zf2-libs": "dev-master",
+        "spalax/zf2-file-uploader": "dev-master",
         "doctrine/doctrine-module": "0.*",
         "doctrine/doctrine-orm-module": "0.*",
         "doctrine/migrations": "v1.0-ALPHA1",

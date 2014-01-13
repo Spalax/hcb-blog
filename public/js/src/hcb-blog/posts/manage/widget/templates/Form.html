@@ -1,0 +1,33 @@
+<form data-dojo-attach-point="containerNode, enterNode" class="dijitHidden">
+    ${!_t.nameLabel}
+    <input class="${baseClass}Name" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"name"' />
+    ${!_t.nameHelp}
+
+    ${!_t.routeLabel}
+    <input class="${baseClass}Route" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"route"' />
+    ${!_t.routeHelp}
+
+    ${!_t.descriptionLabel}
+    <input class="${baseClass}Description" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"descr"' />
+    ${!_t.descriptionHelp}
+
+    ${!_t.titleLabel}
+    <input class="${baseClass}Title" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"title"' />
+    ${!_t.titleHelp}
+
+    ${!_t.bodyLabel}
+    <div class="${baseClass}Editor" data-dojo-attach-point="editorNode"></div>
+    ${!_t.bodyHelp}
+
+    <input class="${baseClass}AddButton"
+           data-dojo-type="dojo-common/form/BusyButton"
+           data-dojo-attach-event="onClick: save"
+           data-dojo-props='name:"send",
+                            label:"${!_t.addButton}"' />
+
+    <input class="${baseClass}ResetButton"
+           data-dojo-type="dijit/form/Button"
+           data-dojo-attach-event="onClick: reset"
+           data-dojo-props='name:"reset",
+                            label:"${!_t.resetButton}"' />
+</form>

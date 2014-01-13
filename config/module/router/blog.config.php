@@ -21,21 +21,21 @@ return array(
                     ),
                     'may_terminate' => false,
                     'child_routes' => array(
-                        'show' => array(
-                            'type' => 'XRequestedWith',
-                            'options' => array(
-                                'with' => 'XMLHttpRequest',
-                                'defaults' => array(
-                                    'controller' => 'Collection-Blog-Posts-Post'
-                                )
-                            )
-                        ),
+//                        'show' => array(
+//                            'type' => 'XRequestedWith',
+//                            'options' => array(
+//                                'with' => 'XMLHttpRequest',
+//                                'defaults' => array(
+//                                    'controller' => 'Collection-Blog-Post-Data'
+//                                )
+//                            )
+//                        ),
                         'delete' => array(
                             'type' => 'method',
                             'options' => array(
                                 'verb' => 'delete',
                                 'defaults' => array(
-                                    'controller' => 'Collection-Blog-Posts-Post-Delete'
+                                    'controller' => 'Collection-Blog-Post-Delete'
                                 )
                             )
                         )
@@ -53,7 +53,7 @@ return array(
                             'options' => array(
                                 'with' => 'XMLHttpRequest',
                                 'defaults' => array(
-                                    'controller' => 'Collection-Blog-Posts-List'
+                                    'controller' => 'Collection-Blog-Posts'
                                 )
                             )
                         )
@@ -64,7 +64,7 @@ return array(
                     'options' => array(
                         'verb' => 'post',
                         'defaults' => array(
-                            'controller' => 'Collection-Blog-Posts-Create'
+                            'controller' => 'Collection-Blog-Post-Create'
                         )
                     )
                 )

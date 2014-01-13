@@ -1,8 +1,9 @@
 <?php
-namespace HcbTranslations\Data\Exception;
+namespace HcbBlog\Stdlib\Response\Exception;
 
-use HcbTranslations\Exception\ExceptionInterface;
+use HcbBlog\Exception\ExceptionInterface;
 
 class InvalidArgumentException extends \InvalidArgumentException implements ExceptionInterface
 {
+
 }
