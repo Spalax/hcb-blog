@@ -1,5 +1,6 @@
 <?php
 return array(
-    'Collection-Blog-Posts',
-    'Collection-Blog-Post-Create'
+    'HcbBlog-Posts',
+    'HcbBlog-Posts-Post-Create',
+    'HcbBlog-Posts-Post-Data-Save'
 );

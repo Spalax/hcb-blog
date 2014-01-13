@@ -54,7 +54,10 @@ define([
                                 }
                             }, function (err) {
                                 console.error("Error in asynchronous call", err, arguments);
-                            });
+                            }).always(lang.hitch(this, function (){
+                                alert("ALWAYS");
+                                this._form.saveButtonWidget.cancel();
+                            }));
                     } catch (e) {
                          console.error(this.declaredClass, arguments, e);
                          throw e;

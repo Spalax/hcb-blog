@@ -5,12 +5,13 @@ define([
     "hcb-blog/store/Posts",
     "hc-backend/router",
     "hc-backend/config",
-    "dojo-common/store/JsonRest",
+    "dojo/request",
+    "dojo/json",
     "dojo-common/response/_DataMixin",
     "dojo-common/response/_StatusMixin",
     "dojo-common/response/_MessageMixin"
 ], function(declare, lang, Deferred, PostsStore,
-            router, config, JsonRest,  _DataMixin, _StatusMixin, _MessageMixin) {
+            router, config, request, JSON, _DataMixin, _StatusMixin, _MessageMixin) {
     return declare(null, {
 
             identifier: null,
@@ -31,12 +32,12 @@ define([
                             }
 
                             var dataResult = response.getData();
-                            alert(dataResult.id);
                             if (!dataResult || !dataResult.id) {
                                 return def.reject("Server does not return identifier of created entry");
                             }
 
                             this.identifier = dataResult.id;
+                            alert("Resolve now "+this.identifier);
                             def.resolve(this.identifier);
                         } catch (e) {
                             console.error(this.declaredClass, arguments, e);
@@ -72,6 +73,7 @@ define([
                     if (!this.identifier) {
                         this._createIdentifier().then(lang.hitch(this, function (identifier) {
                             try {
+                                alert("Resolved with identifier "+identifier);
                                 storeData(data, identifier);
                             } catch (e) {
                                  console.error(this.declaredClass, arguments, e);
@@ -82,6 +84,7 @@ define([
                             console.error("Error in asynchronous call", err, arguments);
                         })
                     } else {
+                        alert("Identifier already defined "+this.identifier);
                         storeData(data, this.identifier);
                     }
 
@@ -94,9 +97,15 @@ define([
 
             _storeData: function (data, identifier) {
                 try {
-                    var store = new JsonRest({target: router.assemble(config.get('primaryRoute')+'/blog/posts/:id',
-                                             {id: identifier})});
-                    return store.add(data);
+                    var url = router.assemble("/superman/blog/posts/:id/:lang",
+                                              {'id': identifier, 'lang': 'ru'});
+
+                    alert(JSON.stringify(data));
+                    return request.put(url, {data: JSON.stringify(data),
+                                             handleAs: "json",
+                                             headers: {
+                                               "Content-Type": "application/json"
+                                             }});
                 } catch (e) {
                      console.error(this.declaredClass, arguments, e);
                      throw e;

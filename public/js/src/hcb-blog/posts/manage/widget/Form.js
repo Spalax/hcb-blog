@@ -3,18 +3,19 @@ define([
     "dijit/form/Form",
     "dijit/_WidgetsInTemplateMixin",
     "hc-backend/component/form/_ResourceSaverMixin",
-    "hc-backend/component/form/_EnterKeyMixin",
     "hc-backend/router",
     "dojo/text!./templates/Form.html",
     "dojo-ckeditor/Editor",
     "dojo/i18n!../../../nls/Add",
     "dijit/form/TextBox",
-    "dojo-common/form/BusyButton"
+    "dijit/form/Textarea",
+    "dojo-common/form/BusyButton",
+    "dijit/form/ValidationTextBox"
 ], function(declare, Form, _WidgetsInTemplateMixin,
-            _ResourceSaverMixin, _EnterKeyMixin, router, template,
+            _ResourceSaverMixin, router, template,
             Editor, translation) {
 
-    return declare([ Form, _ResourceSaverMixin, _EnterKeyMixin, _WidgetsInTemplateMixin ], {
+    return declare([ Form, _ResourceSaverMixin, _WidgetsInTemplateMixin ], {
         //  summary:
         //      Form widget for adding page to the CMS database
 
@@ -32,8 +33,6 @@ define([
         postMixInProperties: function () {
             try {
                 this.filebrowserUploadUrl = router.assemble('/file', {}, true);
-                this.editor = new Editor({name: 'content',
-                                          settings: {filebrowserUploadUrl: this.filebrowserUploadUrl}});
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;
@@ -53,15 +52,6 @@ define([
             try {
                 console.log("Save data >>", this.get('value'));
                 this.onSave(this.get('value'));
-            } catch (e) {
-                 console.error(this.declaredClass, arguments, e);
-                 throw e;
-            }
-        },
-
-        postCreate: function () {
-            try {
-                this.editor.placeAt(this.editorNode);
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;

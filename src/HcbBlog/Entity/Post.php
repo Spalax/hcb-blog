@@ -28,6 +28,13 @@ class Post implements EntityInterface
     private $id;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="enabled", type="integer", nullable=false)
+     */
+    private $enabled = 0;
+
+    /**
      * @var Data
      *
      * @ORM\OneToMany(targetEntity="HcbBlog\Entity\Post\Data", mappedBy="post")
@@ -50,6 +57,29 @@ class Post implements EntityInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set enabled
+     *
+     * @param int $enabled
+     * @return Data
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return int
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
     }
 
     /**

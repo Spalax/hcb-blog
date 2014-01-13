@@ -4,5 +4,8 @@ return array(
     'EventManager',
 
     'Zend\ServiceManager\ServiceLocatorInterface' =>
-    'ServiceManager'
+    'ServiceManager',
+
+    'HcbBlog\Data\Posts\Post\Data\SaveInterface' =>
+    'HcbBlog\Data\Posts\Post\Data\Save'
 );

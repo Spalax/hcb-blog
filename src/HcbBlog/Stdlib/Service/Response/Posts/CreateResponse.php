@@ -21,6 +21,7 @@ class CreateResponse extends Response implements DataInterface
         if (!is_numeric($postsId)) {
             throw new InvalidArgumentException("Invalid type of posts id, must be numeric");
         }
+
         $this->postsId = $postsId;
     }
 

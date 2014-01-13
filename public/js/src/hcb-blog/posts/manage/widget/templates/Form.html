@@ -1,26 +1,53 @@
-<form data-dojo-attach-point="containerNode, enterNode" class="dijitHidden">
-    ${!_t.nameLabel}
-    <input class="${baseClass}Name" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"name"' />
-    ${!_t.nameHelp}
-
-    ${!_t.routeLabel}
-    <input class="${baseClass}Route" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"route"' />
-    ${!_t.routeHelp}
-
-    ${!_t.descriptionLabel}
-    <input class="${baseClass}Description" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"descr"' />
-    ${!_t.descriptionHelp}
-
+<form data-dojo-attach-point="containerNode" class="dijitHidden">
     ${!_t.titleLabel}
-    <input class="${baseClass}Title" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"title"' />
+    <input class="${baseClass}Title"
+           data-dojo-type="dijit/form/ValidationTextBox"
+           data-dojo-props='name:"title",
+                            required: true,
+                            maxLength: 500' />
     ${!_t.titleHelp}
 
-    ${!_t.bodyLabel}
-    <div class="${baseClass}Editor" data-dojo-attach-point="editorNode"></div>
-    ${!_t.bodyHelp}
+    ${!_t.urlLabel}
+    <input class="${baseClass}Url" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"url"' />
+    ${!_t.urlHelp}
+
+    ${!_t.metaTitleLabel}
+    <input class="${baseClass}Title"
+           data-dojo-type="dijit/form/Textarea"
+           data-dojo-props='name:"metaTitle", maxLength: 300' />
+    ${!_t.metaTitleHelp}
+
+    ${!_t.metaDescriptionLabel}
+    <input class="${baseClass}Description"
+           data-dojo-type="dijit/form/Textarea"
+           data-dojo-props='name:"metaDescription", maxLength: 300' />
+    ${!_t.metaDescriptionHelp}
+
+    ${!_t.metaKeywordsLabel}
+    <input class="${baseClass}Keywords"
+           data-dojo-type="dijit/form/Textarea"
+           data-dojo-props='name:"metaKeywords", maxLength: 300' />
+    ${!_t.metaKeywordsHelp}
+
+    ${!_t.previewLabel}
+    <div class="${baseClass}Editor"
+         data-dojo-type="dojo-ckeditor/Editor"
+         data-dojo-attach-point="previewEditorWidget"
+         data-dojo-props='name:"preview",
+                          settings:{filebrowserUploadUrl: "${filebrowserUploadUrl}"}'></div>
+    ${!_t.previewHelp}
+
+    ${!_t.contentLabel}
+    <div class="${baseClass}Editor"
+         data-dojo-type="dojo-ckeditor/Editor"
+         data-dojo-attach-point="contentEditorWidget"
+         data-dojo-props='name:"content",
+                          settings: {filebrowserUploadUrl: "${filebrowserUploadUrl}"}'></div>
+    ${!_t.contentHelp}
 
     <input class="${baseClass}AddButton"
            data-dojo-type="dojo-common/form/BusyButton"
+           data-dojo-attach-point="saveButtonWidget"
            data-dojo-attach-event="onClick: save"
            data-dojo-props='name:"send",
                             label:"${!_t.addButton}"' />

@@ -30,12 +30,31 @@ return array(
 //                                )
 //                            )
 //                        ),
+                        'data' => array(
+                            'type' => 'segment',
+                            'options' => array(
+                                'route' => '/:dataLang',
+                                'constraints' => array( 'dataLang' => '[a-z]{2}' )
+                            ),
+                            'may_terminate' => false,
+                            'child_routes' => array(
+                                'save' => array(
+                                    'type' => 'method',
+                                    'options' => array(
+                                        'verb' => 'put',
+                                        'defaults' => array(
+                                            'controller' => 'HcbBlog-Posts-Post-Data-Save'
+                                        )
+                                    )
+                                )
+                            )
+                        ),
                         'delete' => array(
                             'type' => 'method',
                             'options' => array(
                                 'verb' => 'delete',
                                 'defaults' => array(
-                                    'controller' => 'Collection-Blog-Post-Delete'
+                                    'controller' => 'HcbBlog-Posts-Post-Delete'
                                 )
                             )
                         )
@@ -53,7 +72,7 @@ return array(
                             'options' => array(
                                 'with' => 'XMLHttpRequest',
                                 'defaults' => array(
-                                    'controller' => 'Collection-Blog-Posts'
+                                    'controller' => 'HcbBlog-Posts'
                                 )
                             )
                         )
@@ -64,7 +83,7 @@ return array(
                     'options' => array(
                         'verb' => 'post',
                         'defaults' => array(
-                            'controller' => 'Collection-Blog-Post-Create'
+                            'controller' => 'HcbBlog-Posts-Post-Create'
                         )
                     )
                 )

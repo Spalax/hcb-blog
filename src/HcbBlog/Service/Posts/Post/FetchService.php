@@ -1,5 +1,5 @@
 <?php
-namespace HcbTranslations\Service\Blog\Posts\Post;
+namespace HcbBlog\Service\Posts\Post;
 
 use HcBackend\Service\FetchServiceInterface;
 use Doctrine\ORM\EntityManager;

@@ -7,7 +7,7 @@ use HcBackend\Entity\PageBindInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use HcbBlog\Entity\Post;
-use Zf2FileUploader\Entity\ImageBindInterface;
+use HcBackend\Entity\ImageBindInterface;
 use Zf2FileUploader\Entity\ImageInterface;
 
 /**
