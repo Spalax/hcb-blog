@@ -21,29 +21,42 @@ return array(
                     ),
                     'may_terminate' => false,
                     'child_routes' => array(
-//                        'show' => array(
-//                            'type' => 'XRequestedWith',
-//                            'options' => array(
-//                                'with' => 'XMLHttpRequest',
-//                                'defaults' => array(
-//                                    'controller' => 'Collection-Blog-Post-Data'
-//                                )
-//                            )
-//                        ),
                         'data' => array(
-                            'type' => 'segment',
+                            'type' => 'literal',
                             'options' => array(
-                                'route' => '/:dataLang',
-                                'constraints' => array( 'dataLang' => '[a-z]{2}' )
+                                'route' => '/polyglot',
+                                'defaults' => array(
+                                    'controller' => 'HcbBlog-Controller-Posts-Post-Data-List'
+                                )
                             ),
-                            'may_terminate' => false,
+                            'may_terminate' => true,
                             'child_routes' => array(
-                                'save' => array(
+                                'lang' => array(
+                                    'type' => 'segment',
+                                    'options' => array(
+                                        'route' => '/:dataLang',
+                                        'constraints' => array( 'dataLang' => '[a-z]{2}' )
+                                    ),
+                                    'may_terminate' => false,
+                                    'child_routes' => array(
+                                        'save' => array(
+                                            'type' => 'method',
+                                            'options' => array(
+                                                'verb' => 'put',
+                                                'defaults' => array(
+                                                    'controller' =>
+                                                    'HcbBlog-Controller-Posts-Post-Data-Save'
+                                                )
+                                            )
+                                        )
+                                    )
+                                ),
+                                'create' => array(
                                     'type' => 'method',
                                     'options' => array(
-                                        'verb' => 'put',
+                                        'verb' => 'post',
                                         'defaults' => array(
-                                            'controller' => 'HcbBlog-Posts-Post-Data-Save'
+                                            'controller' => 'HcbBlog-Controller-Posts-Post-Data-Save'
                                         )
                                     )
                                 )
@@ -54,7 +67,7 @@ return array(
                             'options' => array(
                                 'verb' => 'delete',
                                 'defaults' => array(
-                                    'controller' => 'HcbBlog-Posts-Post-Delete'
+                                    'controller' => 'HcbBlog-Controller-Posts-Post-Delete'
                                 )
                             )
                         )
@@ -72,7 +85,7 @@ return array(
                             'options' => array(
                                 'with' => 'XMLHttpRequest',
                                 'defaults' => array(
-                                    'controller' => 'HcbBlog-Posts'
+                                    'controller' => 'HcbBlog-Controller-Posts-List'
                                 )
                             )
                         )
@@ -83,7 +96,7 @@ return array(
                     'options' => array(
                         'verb' => 'post',
                         'defaults' => array(
-                            'controller' => 'HcbBlog-Posts-Post-Create'
+                            'controller' => 'HcbBlog-Controller-Posts-Post-Create'
                         )
                     )
                 )

@@ -1,12 +1,16 @@
 define([
     "dojo/_base/declare",
     "dojo/_base/array",
+    "dojo/_base/lang",
     "hcb-blog/posts/manage/LangContainer",
     "dojo-common/store/JsonRest",
+    "dojo/store/Cache",
+    "dojo/store/Memory",
     "hc-backend/router",
     "./widget/Tab",
     "hc-backend/config"
-], function(declare, array, LangContainer, JsonRest, router, Tab, config) {
+], function(declare, array, lang, LangContainer, JsonRest, Cache,
+            Memory, router, Tab, config) {
     return declare([ LangContainer ], {
         tabWidget: Tab,
 
@@ -14,20 +18,17 @@ define([
             try {
                 var collectionUrl = router.assemble(config.get('primaryRoute')+'/blog/posts/:postsId/data',
                                                     {postsId: identifier});
-                var individualRoute = collectionUrl+'/:dataId';
 
-                var _store = new JsonRest({target: collectionUrl});
-                alert("HER");
-                _store.query().forEach(function (item) {
+                this.saveService.set('identifier', identifier);
+                var _store = this.saveService.get('polyglotStore');
+
+                _store.query().forEach(lang.hitch(this, function (item) {
                     try {
-                        alert(12);
-                        var store = new JsonRest({target: router.assemble(individualRoute, {dataId: item.id})});
                         array.some(this.getChildren(), function (child) {
                             try {
-                                alert(13);
                                 if (child.get('lang') == item.lang) {
-                                    alert(14);
-                                    child.attr('store', store);
+                                    console.log("Found form for language >>", item.lang, _store.get(item.lang));
+                                    child.set('store', _store);
                                     return true;
                                 }
                             } catch (e) {
@@ -39,7 +40,7 @@ define([
                         console.error(this.declaredClass, arguments, e);
                         throw e;
                     }
-                });
+                }));
 
                 this.inherited(arguments);
             } catch (e) {

@@ -130,7 +130,6 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
     {
         $invalidInputs = $this->getInvalidInput();
 
-        \Zf2Libs\Debug\Utility::dump($invalidInputs);
         $messages = array();
         if (array_key_exists('lang', $invalidInputs)) {
             $messages['lang'] = $this->translate->translate('Language must be correct');

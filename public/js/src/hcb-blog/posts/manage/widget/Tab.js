@@ -11,9 +11,8 @@ define([
     return declare([ ContentPane ], {
 
         _form: null,
-        createService: null,
+        saveService: null,
         lang: '',
-        title: '',
 
         onShow: function () {
             try {
@@ -31,19 +30,17 @@ define([
                 this._form = new Form();
                 var domNode = this._form.domNode;
 
-                alert("Form created");
-
                 this._form.on('ready', function (){
                     domClass.remove(domNode, 'dijitHidden');
                 });
 
                 this._form.on('save', lang.hitch(this, function (data){
                     try {
-                        if (!this.createService) {
-                            throw "Creator service undefined";
+                        if (!this.saveService) {
+                            throw "Save service undefined";
                         }
 
-                        this.createService.create(data, this.lang)
+                        this.saveService.save(data, this.lang)
                             .then(function () {
                                 try {
                                     // TODO:
@@ -55,7 +52,6 @@ define([
                             }, function (err) {
                                 console.error("Error in asynchronous call", err, arguments);
                             }).always(lang.hitch(this, function (){
-                                alert("ALWAYS");
                                 this._form.saveButtonWidget.cancel();
                             }));
                     } catch (e) {

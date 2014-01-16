@@ -1,9 +1,14 @@
 <?php
 return array(
-    'HcbBlog-Posts' => 'HcBackend\Controller\Collection\CommonListController',
-    'HcbBlog-Posts-Post-Create' => 'HcBackend\Controller\Collection\CommonDataController',
-    'HcbBlog-Posts-Post-Data-Save' => 'HcBackend\Controller\Collection\CommonResourceDataController',
+    //Controllers
+    'HcbBlog-Controller-Posts-List' => 'HcBackend\Controller\Common\Collection\ListController',
+    'HcbBlog-Controller-Posts-Post-Create' => 'HcBackend\Controller\Common\Collection\DataController',
+    'HcbBlog-Controller-Posts-Post-Data-Save' => 'HcBackend\Controller\Common\Collection\ResourceDataController',
+    'HcbBlog-Controller-Posts-Post-Data-List' => 'HcBackend\Controller\Common\Collection\ResourceListController',
 
-    'HcbBlog-Posts-Post-DataInput-LoadResourceInput' => 'Zf2FileUploader\Input\Image\LoadResource\FromText',
-    'HcbBlog-Posts-Post-DataImages-SaveService' => 'Zf2FileUploader\Service\Image\SaveService'
+    //Common
+    'HcbBlog-Posts-PaginatorViewModel' => 'Zf2Libs\Paginator\ViewModel\JsonModel',
+    'HcbBlog-Posts-Post-Data-PaginatorViewModel' => 'Zf2Libs\Paginator\ViewModel\JsonModel',
+    'HcbBlog-Posts-Post-Data-InputLoadResourceInput' => 'Zf2FileUploader\Input\Image\LoadResource\FromText',
+    'HcbBlog-Posts-Post-Data-ImagesSaveService' => 'Zf2FileUploader\Service\Image\SaveService'
 );
