@@ -7,7 +7,7 @@ use HcbBlog\Data\Posts\Post\Data\SaveInterface;
 use HcbBlog\Entity\Post;
 use Zf2Libs\Stdlib\Service\Response\Messages\Response;
 
-class SaveCommand implements ResourceCommandInterface
+class CreateCommand implements ResourceCommandInterface
 {
     /**
      * @var SaveInterface
@@ -20,19 +20,19 @@ class SaveCommand implements ResourceCommandInterface
     protected $service;
 
     public function __construct(SaveInterface $data,
-                                SaveService $service)
+                                CreateService $service)
     {
         $this->data = $data;
         $this->service = $service;
     }
 
     /**
-     * @param Post\Data $postDataEntity
+     * @param Post $postEntity
      *
      * @return Response
      */
-    public function execute(EntityInterface $postDataEntity)
+    public function execute(EntityInterface $postEntity)
     {
-        return $this->service->save($postDataEntity, $this->data);
+        return $this->service->save($postEntity, $this->data);
     }
 }

@@ -47,7 +47,7 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
         $input = $di->get('Zend\InputFilter\Input', array('name'=>'title'));
         $input->setRequired(true);
         $input->getValidatorChain()->attach($di->get('Zend\Validator\StringLength',
-                                                     array('options'=>array('max'=>500))));
+            array('options'=>array('max'=>500))));
         $input->getFilterChain()->attach($di->get('Zend\Filter\StringTrim'));
         $this->add($input);
 
@@ -55,23 +55,23 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
         $input = $di->get('Zend\InputFilter\Input', array('name'=>'lang'));
         $input->setRequired(true);
         $input->getValidatorChain()
-              ->attach($di->get('Zend\Validator\StringLength', array('options'=>array('min'=>2, 'max'=>2))))
-              ->attach($di->get('Zend\Validator\Regex', array('pattern'=>'/^[a-z]{2}$/')));
+            ->attach($di->get('Zend\Validator\StringLength', array('options'=>array('min'=>2, 'max'=>2))))
+            ->attach($di->get('Zend\Validator\Regex', array('pattern'=>'/^[a-z]{2}$/')));
         $input->getFilterChain()->attach($di->get('Zend\Filter\StringToLower'))
-                                ->attach($di->get('Zend\Filter\StringTrim'));
+            ->attach($di->get('Zend\Filter\StringTrim'));
         $this->add($input);
 
         /* @var $input \Zend\InputFilter\Input */
         $input = $di->get('Zend\InputFilter\Input', array('name'=>'preview'))
-                    ->setRequired(false)
-                    ->setAllowEmpty(true);
+            ->setRequired(false)
+            ->setAllowEmpty(true);
         $input->getFilterChain()->attach($di->get('Zend\Filter\StringTrim'));
         $this->add($input);
 
         /* @var $input \Zend\InputFilter\Input */
         $input = $di->get('Zend\InputFilter\Input', array('name'=>'content'))
-                    ->setRequired(false)
-                    ->setAllowEmpty(true);
+            ->setRequired(false)
+            ->setAllowEmpty(true);
         $input->getFilterChain()->attach($di->get('Zend\Filter\StringTrim'));
         $this->add($input);
 

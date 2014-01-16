@@ -7,18 +7,15 @@ define([
     "dojo/store/Cache",
     "dojo/store/Memory",
     "hc-backend/router",
-    "./widget/Tab",
-    "hc-backend/config"
+    "dojo/Stateful",
+    "hcb-blog/posts/manage/widget/Tab"
 ], function(declare, array, lang, LangContainer, JsonRest, Cache,
-            Memory, router, Tab, config) {
+            Memory, router, Stateful, Tab) {
     return declare([ LangContainer ], {
         tabWidget: Tab,
 
         _setIdentifierAttr: function (identifier) {
             try {
-                var collectionUrl = router.assemble(config.get('primaryRoute')+'/blog/posts/:postsId/data',
-                                                    {postsId: identifier});
-
                 this.saveService.set('identifier', identifier);
                 var _store = this.saveService.get('polyglotStore');
 
@@ -27,8 +24,9 @@ define([
                         array.some(this.getChildren(), function (child) {
                             try {
                                 if (child.get('lang') == item.lang) {
-                                    console.log("Found form for language >>", item.lang, _store.get(item.lang));
-                                    child.set('store', _store);
+                                    console.log("Found form for language >>",
+                                                item.lang, _store.get(item.id));
+                                    child.set('value', item);
                                     return true;
                                 }
                             } catch (e) {

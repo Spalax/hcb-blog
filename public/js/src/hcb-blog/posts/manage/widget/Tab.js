@@ -10,13 +10,13 @@ define([
 
     return declare([ ContentPane ], {
 
-        _form: null,
+        form: null,
         saveService: null,
         lang: '',
 
         onShow: function () {
             try {
-                if (!this._form) {
+                if (!this.form) {
                     this.init();
                 }
             } catch (e) {
@@ -25,22 +25,41 @@ define([
             }
         },
 
+        _setValueAttr: function (value) {
+            try {
+                if (!this.form) {
+                    var _watcher = this.watch('form', function (){
+                        _watcher.unwatch();
+                        this.form.set('value', value);
+                    });
+                } else {
+                    this.form.set('value', value);
+                }
+            } catch (e) {
+                console.error(this.declaredClass, arguments, e);
+                throw e;
+            }
+        },
+
         init: function () {
             try {
-                this._form = new Form();
-                var domNode = this._form.domNode;
+                this.set('form', new Form());
 
-                this._form.on('ready', function (){
+                var domNode = this.form.domNode;
+
+                this.form.set('value', {lang: this.lang});
+
+                this.form.on('ready', function (){
                     domClass.remove(domNode, 'dijitHidden');
                 });
 
-                this._form.on('save', lang.hitch(this, function (data){
+                this.form.on('save', lang.hitch(this, function (data){
                     try {
                         if (!this.saveService) {
                             throw "Save service undefined";
                         }
 
-                        this.saveService.save(data, this.lang)
+                        this.saveService.save(data)
                             .then(function () {
                                 try {
                                     // TODO:
@@ -52,7 +71,7 @@ define([
                             }, function (err) {
                                 console.error("Error in asynchronous call", err, arguments);
                             }).always(lang.hitch(this, function (){
-                                this._form.saveButtonWidget.cancel();
+                                this.form.saveButtonWidget.cancel();
                             }));
                     } catch (e) {
                          console.error(this.declaredClass, arguments, e);

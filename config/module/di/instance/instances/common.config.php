@@ -26,5 +26,17 @@ return array(
         'parameters' => array(
             'extractor' => 'HcbBlog\Stdlib\Extractor\Posts\Post\Data\Extractor'
         )
+    ),
+
+    'HcbBlog-Posts-Post-FetchService' => array(
+        'parameters' => array(
+            'entityName' => 'HcbBlog\Entity\Post'
+        )
+    ),
+
+    'HcbBlog-Posts-Post-Data-FetchService' => array(
+        'parameters' => array(
+            'entityName' => 'HcbBlog\Entity\Post\Data'
+        )
     )
 );

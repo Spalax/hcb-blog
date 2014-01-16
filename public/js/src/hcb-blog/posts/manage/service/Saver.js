@@ -21,7 +21,7 @@ define([
     return declare([Stateful, Evented], {
 
             polyglotCollectionPath: '/polyglot',
-            polyglotCollectionId: 'lang',
+            polyglotCollectionId: 'id',
 
             polyglotCollectionStore: null,
             polyglotStore: null,
@@ -84,46 +84,52 @@ define([
                 }
             },
 
-            save: function (data, langId) {
+            save: function (data) {
                 try {
                     var def = new Deferred();
+                    var _self = this;
 
-                    data = lang.mixin(data, {'lang': langId});
+                    var storeData = function (data) {
+                        _self._storeData(data).then(function (resp){
+                            var response = new declare([_DataMixin])(resp);
+                            response.optional('data');
 
-                    var storeData = lang.hitch(this, function (data) {
-                        this._storeData(data).then(function (resp){
+                            var dataResult = response.getData();
+                            if (!dataResult || !dataResult.id) {
+                                _self.emit('updated', {'data': data});
+                            } else {
+                                data['id'] = dataResult.id;
+                                _self.emit('created', {'data': data});
+                            }
+
                             def.resolve(resp);
                         }, function (err) {
                             def.reject(err);
                             console.error("Error in asynchronous call", err, arguments);
                         });
                         return def;
-                    });
+                    };
 
-                    if (this.polyglotStore === null) {
-                        this._initPolyglotStore().then(lang.hitch(this, function () {
+                    if (_self.polyglotStore === null) {
+                        _self._initPolyglotStore().then(function () {
                             try {
-                                storeData(data).then(lang.hitch(this, function (){
-                                    this.emit('itemCreated', {'data': data});
-                                }));
+                                storeData(data);
                             } catch (e) {
-                                 console.error(this.declaredClass, arguments, e);
+                                 console.error(_self.declaredClass, arguments, e);
                                  throw e;
                             }
-                        }), function (err) {
+                        }, function (err) {
                             def.reject(err);
                             console.error("Error in asynchronous call", err, arguments);
                         })
                     } else {
                         console.log("!!!PolyglotStore already defined!!!");
-                        storeData(data).then(lang.hitch(this, function (){
-                            this.emit('itemUpdated', {'data': data});
-                        }));
+                        storeData(data);
                     }
 
                     return def;
                 } catch (e) {
-                     console.error(this.declaredClass, arguments, e);
+                     console.error(_self.declaredClass, arguments, e);
                      throw e;
                 }
             },
@@ -134,6 +140,7 @@ define([
                       * Store data to the server, it is will be stored with PUT method
                       * always, till we have polyglotIdentifier inside data
                       **/
+                      console.log("Data is >>>", data, "Store >>", this.polyglotStore);
                       return this.polyglotStore.put(data);
                 } catch (e) {
                      console.error(this.declaredClass, arguments, e);

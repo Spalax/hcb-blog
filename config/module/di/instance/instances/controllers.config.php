@@ -17,15 +17,24 @@ return array(
     'HcbBlog-Controller-Posts-Post-Data-Save' => array(
         'parameters' => array(
             'inputData' => 'HcbBlog\Data\Posts\Post\Data\Save',
-            'fetchService' => 'HcbBlog\Service\Posts\Post\FetchService',
+            'fetchService' => 'HcbBlog-Posts-Post-Data-FetchService',
             'serviceCommand' => 'HcbBlog\Service\Posts\Post\Data\SaveCommand',
+            'jsonResponseModelFactory' => 'Zf2Libs\View\Model\Uploader\Specific\StatusMessageDataModelFactory'
+        )
+    ),
+
+    'HcbBlog-Controller-Posts-Post-Data-Create' => array(
+        'parameters' => array(
+            'inputData' => 'HcbBlog\Data\Posts\Post\Data\Save',
+            'fetchService' => 'HcbBlog-Posts-Post-FetchService',
+            'serviceCommand' => 'HcbBlog\Service\Posts\Post\Data\CreateCommand',
             'jsonResponseModelFactory' => 'Zf2Libs\View\Model\Uploader\Specific\StatusMessageDataModelFactory'
         )
     ),
 
     'HcbBlog-Controller-Posts-Post-Data-List' => array(
         'parameters' => array(
-            'fetchService' => 'HcbBlog\Service\Posts\Post\FetchService',
+            'fetchService' => 'HcbBlog-Posts-Post-FetchService',
             'paginatorDataFetchService' => 'HcbBlog\Service\Posts\Post\FetchQbBuilderService',
             'viewModel' => 'HcbBlog-Posts-Post-Data-PaginatorViewModel'
         )

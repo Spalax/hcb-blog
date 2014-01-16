@@ -39,6 +39,45 @@ define([
             }
         },
 
+        _setValueAttr: function (values) {
+            try {
+                this.inherited(arguments);
+
+                console.log("Values set in form >>>", values);
+                if (values['id']) {
+                    this.__id = values['id'];
+                }
+
+                if (values['lang'] && values['lang'].length) {
+                    this.__lang = values['lang'];
+                }
+            } catch (e) {
+                 console.error(this.declaredClass, arguments, e);
+                 throw e;
+            }
+        },
+
+        _getValueAttr: function () {
+            try {
+                var values = this.inherited(arguments);
+
+                if (this.__id) {
+                    values['id'] = this.__id;
+                }
+
+                if (!this.__lang) {
+                    throw "Lang must be defined for the form";
+                }
+
+                values['lang'] = this.__lang;
+
+                return values;
+            } catch (e) {
+                 console.error(this.declaredClass, arguments, e);
+                 throw e;
+            }
+        },
+
         onSave: function () {
             try {
                  alert("On save");

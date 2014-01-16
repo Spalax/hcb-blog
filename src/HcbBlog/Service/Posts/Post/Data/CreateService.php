@@ -5,10 +5,10 @@ use HcBackend\Service\PageBinderServiceInterface;
 use HcBackend\Service\ImageBinderServiceInterface;
 use HcbBlog\Data\Posts\Post\Data\SaveInterface;
 use HcbBlog\Entity\Post;
-use HcbBlog\Stdlib\Service\Response\Posts\Post\SaveResponse;
 use Doctrine\ORM\EntityManager;
+use HcbBlog\Stdlib\Service\Response\Posts\Post\CreateResponse;
 
-class SaveService
+class CreateService
 {
     /**
      * @var EntityManager
@@ -16,9 +16,9 @@ class SaveService
     protected $entityManager;
 
     /**
-     * @var SaveResponse
+     * @var CreateResponse
      */
-    protected $saveResponse;
+    protected $createResponse;
 
     /**
      * @var PageBinderServiceInterface
@@ -33,47 +33,57 @@ class SaveService
     /**
      * @param EntityManager $entityManager
      * @param PageBinderServiceInterface $pageBinderService
-     * @param SaveResponse $saveResponse
+     * @param ImageBinderServiceInterface $imageBinderService
+     * @param CreateResponse $saveResponse
      */
     public function __construct(EntityManager $entityManager,
                                 PageBinderServiceInterface $pageBinderService,
                                 ImageBinderServiceInterface $imageBinderService,
-                                SaveResponse $saveResponse)
+                                CreateResponse $saveResponse)
     {
         $this->pageBinderService = $pageBinderService;
         $this->imageBinderService = $imageBinderService;
         $this->entityManager = $entityManager;
-        $this->saveResponse = $saveResponse;
+        $this->createResponse = $saveResponse;
     }
 
     /**
      * @param Post $postEntity
-     * @param SaveInterface $saveData
-     * @return SaveResponse
+     * @param SaveInterface $createData
+     * @return CreateResponse
      */
-    public function save(Post\Data $postDataEntity, SaveInterface $saveData)
+    public function save(Post $postEntity, SaveInterface $createData)
     {
         try {
             $this->entityManager->beginTransaction();
 
-            $this->imageBinderService->bind($saveData, $postDataEntity);
-            $this->pageBinderService->bind($saveData, $postDataEntity);
+            $postDataEntity = new Post\Data();
+            $postEntity->setEnabled(1);
+
+            $postDataEntity->setPost($postEntity);
+            $postDataEntity->setLang($createData->getLang());
+
+            $this->imageBinderService->bind($createData, $postDataEntity);
+            $this->pageBinderService->bind($createData, $postDataEntity);
 
             $this->entityManager->persist($postDataEntity);
 
-            $postDataEntity->setTitle($saveData->getTitle());
-            $postDataEntity->setPreview($saveData->getPreview());
-            $postDataEntity->setContent($saveData->getContent());
+            $postDataEntity->setTitle($createData->getTitle());
+            $postDataEntity->setPreview($createData->getPreview());
+            $postDataEntity->setContent($createData->getContent());
 
             $this->entityManager->flush();
+
+            $this->createResponse->setPostId($postDataEntity->getId());
+
             $this->entityManager->commit();
         } catch (\Exception $e) {
             $this->entityManager->rollback();
-            $this->saveResponse->error($e->getMessage())->failed();
-            return $this->saveResponse;
+            $this->createResponse->error($e->getMessage())->failed();
+            return $this->createResponse;
         }
 
-        $this->saveResponse->success();
-        return $this->saveResponse;
+        $this->createResponse->success();
+        return $this->createResponse;
     }
 }

@@ -24,30 +24,16 @@ return array(
                         'data' => array(
                             'type' => 'literal',
                             'options' => array(
-                                'route' => '/polyglot',
-                                'defaults' => array(
-                                    'controller' => 'HcbBlog-Controller-Posts-Post-Data-List'
-                                )
+                                'route' => '/polyglot'
                             ),
-                            'may_terminate' => true,
+                            'may_terminate' => false,
                             'child_routes' => array(
-                                'lang' => array(
-                                    'type' => 'segment',
+                                'show' => array(
+                                    'type' => 'method',
                                     'options' => array(
-                                        'route' => '/:dataLang',
-                                        'constraints' => array( 'dataLang' => '[a-z]{2}' )
-                                    ),
-                                    'may_terminate' => false,
-                                    'child_routes' => array(
-                                        'save' => array(
-                                            'type' => 'method',
-                                            'options' => array(
-                                                'verb' => 'put',
-                                                'defaults' => array(
-                                                    'controller' =>
-                                                    'HcbBlog-Controller-Posts-Post-Data-Save'
-                                                )
-                                            )
+                                        'verb' => 'get',
+                                        'defaults' => array(
+                                            'controller' => 'HcbBlog-Controller-Posts-Post-Data-List'
                                         )
                                     )
                                 ),
@@ -56,7 +42,27 @@ return array(
                                     'options' => array(
                                         'verb' => 'post',
                                         'defaults' => array(
-                                            'controller' => 'HcbBlog-Controller-Posts-Post-Data-Save'
+                                            'controller' => 'HcbBlog-Controller-Posts-Post-Data-Create'
+                                        )
+                                    )
+                                ),
+                                'lang' => array(
+                                    'type' => 'segment',
+                                    'options' => array(
+                                        'route' => '/:id',
+                                        'constraints' => array( 'id' => '[0-9]+' )
+                                    ),
+                                    'may_terminate' => false,
+                                    'child_routes' => array(
+                                        'update' => array(
+                                            'type' => 'method',
+                                            'options' => array(
+                                                'verb' => 'put',
+                                                'defaults' => array(
+                                                    'controller' =>
+                                                        'HcbBlog-Controller-Posts-Post-Data-Save'
+                                                )
+                                            )
                                         )
                                     )
                                 )
