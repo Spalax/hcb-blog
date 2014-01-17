@@ -51,7 +51,8 @@ define([
             try {
                 return new this.tabWidget({title: langTitle || langIdentifier,
                                            lang: langIdentifier,
-                                           saveService: this.saveService});
+                                           saveService: this.saveService,
+                                           router: this.router});
             } catch (e) {
                 console.error(this.declaredClass, arguments, e);
                 throw e;

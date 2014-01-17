@@ -6,6 +6,12 @@ return array(
         )
     ),
 
+    'HcbBlog\Data\Posts\Post\Delete' => array(
+        'parameters' => array(
+            'resourceInputLoader' => 'HcbBlog-Posts-Post-Data-InputLoadResourceInput'
+        )
+    ),
+
     'HcbBlog\Data\Posts\Post\Data\Save' => array(
         'parameters' => array(
             'resourceInputLoader' => 'HcbBlog-Posts-Post-Data-InputLoadResourceInput'
@@ -37,6 +43,25 @@ return array(
     'HcbBlog-Posts-Post-Data-FetchService' => array(
         'parameters' => array(
             'entityName' => 'HcbBlog\Entity\Post\Data'
+        )
+    ),
+
+    'HcbBlog-Posts-Collection-Ids' => array(
+        'parameters' => array(
+            'entityName' => 'HcbBlog\Entity\Post'
+        )
+    ),
+
+    'HcbBlog-Posts-Collection' => array(
+        'parameters' => array(
+            'idsCollection' => 'HcbBlog-Posts-Collection-Ids',
+            'inputName' => 'posts'
+        )
+    ),
+
+    'HcbBlog\Service\Posts\DeleteService' => array(
+        'parameters' => array(
+            'deleteData' => 'HcbBlog-Posts-Collection'
         )
     )
 );

@@ -2,6 +2,7 @@
 return array(
     //Controllers
     'HcbBlog-Controller-Posts-List' => 'HcBackend\Controller\Common\Collection\ListController',
+    'HcbBlog-Controller-Posts-Delete' => 'HcBackend\Controller\Common\Collection\DataController',
     'HcbBlog-Controller-Posts-Post-Create' => 'HcBackend\Controller\Common\Collection\DataController',
     'HcbBlog-Controller-Posts-Post-Data-Save' => 'HcBackend\Controller\Common\Collection\ResourceDataController',
     'HcbBlog-Controller-Posts-Post-Data-Create' =>
@@ -16,4 +17,6 @@ return array(
 
     'HcbBlog-Posts-Post-FetchService' => 'HcBackend\Service\FetchService',
     'HcbBlog-Posts-Post-Data-FetchService' => 'HcBackend\Service\FetchService',
+    'HcbBlog-Posts-Collection-Ids' => 'HcBackend\Service\Collection\IdsService',
+    'HcbBlog-Posts-Collection' => 'HcBackend\Data\Collection\Entities\ByIds'
 );

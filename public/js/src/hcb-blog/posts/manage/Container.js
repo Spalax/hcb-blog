@@ -18,13 +18,18 @@ define([
         init: function () {
             try {
                 if (!this._langContainerWidget) {
-                    this._langContainerWidget = new this.langContainer();
+                    this._langContainerWidget = new this.langContainer({router: this.router});
                     this.addChild(this._langContainerWidget);
                 }
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;
             }
+        },
+
+        selectLanguageTab: function (language) {
+            this._langContainerWidget &&
+            this._langContainerWidget.selectLanguageTab(language);
         },
 
         destroyWidgets: function () {

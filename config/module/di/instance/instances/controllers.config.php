@@ -7,9 +7,18 @@ return array(
         )
     ),
 
+
     'HcbBlog-Controller-Posts-Post-Create' => array(
         'parameters' => array(
             'serviceCommand' => 'HcbBlog\Service\Posts\CreateService',
+            'jsonResponseModelFactory' => 'Zf2Libs\View\Model\Json\Specific\StatusMessageDataModelFactory'
+        )
+    ),
+
+    'HcbBlog-Controller-Posts-Delete' => array(
+        'parameters' => array(
+            'inputData' => 'HcbBlog-Posts-Collection',
+            'serviceCommand' => 'HcbBlog\Service\Posts\DeleteService',
             'jsonResponseModelFactory' => 'Zf2Libs\View\Model\Json\Specific\StatusMessageDataModelFactory'
         )
     ),

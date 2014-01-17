@@ -26,6 +26,7 @@ define([
                                 if (child.get('lang') == item.lang) {
                                     console.log("Found form for language >>",
                                                 item.lang, _store.get(item.id));
+                                    child.set('identifier', identifier);
                                     child.set('value', item);
                                     return true;
                                 }

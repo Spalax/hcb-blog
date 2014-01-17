@@ -66,6 +66,7 @@ define([
                             if (!dataResult || !dataResult.id) {
                                 return def.reject("Server does not return identifier of created entry");
                             }
+
                             _self.set('identifier', dataResult.id);
                             def.resolve();
                         } catch (e) {

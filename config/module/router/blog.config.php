@@ -67,13 +67,22 @@ return array(
                                     )
                                 )
                             )
-                        ),
+                        )
+                    )
+                ),
+                'delete' => array(
+                    'type' => 'literal',
+                    'options' => array(
+                        'route' => '/delete'
+                    ),
+                    'may_terminate' => false,
+                    'child_routes' => array(
                         'delete' => array(
                             'type' => 'method',
                             'options' => array(
-                                'verb' => 'delete',
+                                'verb' => 'post',
                                 'defaults' => array(
-                                    'controller' => 'HcbBlog-Controller-Posts-Post-Delete'
+                                    'controller' => 'HcbBlog-Controller-Posts-Delete'
                                 )
                             )
                         )

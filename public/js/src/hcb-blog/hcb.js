@@ -8,6 +8,15 @@ define([
     return declare("BlogPackage", [ _Package ], {
         // summary:
         //      Clients package will provide user to manage web site clients
-        title: translation['packageTitle']
+        title: translation['packageTitle'],
+
+        postCreate: function () {
+            try {
+                this.inherited(arguments);
+            } catch (e) {
+                 console.error(this.declaredClass, arguments, e);
+                 throw e;
+            }
+        }
     });
 });

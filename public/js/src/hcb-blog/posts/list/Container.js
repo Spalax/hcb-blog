@@ -10,9 +10,11 @@ define([
     "dojo/request",
     "hc-backend/router",
     "hcb-blog/posts/list/widget/Grid",
-    "dijit/form/Button"
+    "dijit/form/Button",
+    "hc-backend/dgrid/form/DeleteSelectedButton"
 ], function(declare, array, lang, on, _ContentMixin, _TemplatedMixin,
-            template, translation, request, router, Grid, Button) {
+            template, translation, request, router,
+            Grid, Button, DeleteSelectedButton) {
     return declare([ _ContentMixin, _TemplatedMixin ], {
         //  summary:
         //      List container. Contains widgets who responsible for
@@ -27,7 +29,16 @@ define([
 
                 this._addWidget = new Button({'label': translation['addButton'],
                                               'class': this.baseClass+'Add',
-                                              'onClick': lang.hitch(this, '_onAdd')});
+                                              'onClick': lang.hitch(this, function (){
+                                                  router.go(router.assemble('/create', {}, true));
+                                              })});
+
+                this._deleteWidget = new DeleteSelectedButton({'label': translation['deleteSelectedButton'],
+                                                               'target': router.assemble('/delete', {}, true),
+                                                               'name': 'posts',
+                                                               'class': this.baseClass+'DeletePosts',
+                                                               'grid': this._gridWidget});
+
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;
@@ -37,6 +48,7 @@ define([
         startup: function () {
             try {
                 this.addChild(this._addWidget);
+                this.addChild(this._deleteWidget);
                 this.addChild(this._gridWidget);
                 this.inherited(arguments);
             } catch (e) {
@@ -51,15 +63,6 @@ define([
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;
-            }
-        },
-
-        _onAdd: function () {
-            try {
-                router.go(router.assemble('/create', {}, true));
-            } catch (e) {
-                console.error(this.declaredClass, arguments, e);
-                throw e;
             }
         }
     });

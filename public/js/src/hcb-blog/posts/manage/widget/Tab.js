@@ -3,7 +3,7 @@ define([
     "dojo/_base/lang",
     "dojo/on",
     "hcb-blog/posts/manage/widget/Form",
-    "hc-backend/layout/ContentPane",
+    "hc-backend/layout/ContentPaneHash",
     "dojo/dom-class"
 ], function(declare, lang, on, Form,
             ContentPane, domClass) {
@@ -22,6 +22,19 @@ define([
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;
+            }
+        },
+
+        getHash: function () {
+            try {
+                if (this.identifier) {
+                    return this.router.assemble({id: this.identifier, lang: this.lang}, '/:lang');
+                } else {
+                    return this.router.assemble({lang: this.lang});
+                }
+            } catch (e) {
+                console.error(this.declaredClass, arguments, e);
+                throw e;
             }
         },
 
