@@ -1,8 +1,8 @@
 define({ root:
 //begin v1.x content
     ({
-        addButton: "Add New Entry",
-        resetButton: "Clear Form",
+        addButton: "Save Entry",
+        resetButton: "Reset Form",
 
         titleLabel: "Title",
         titleHelp: "Text which will be displayed as title",
