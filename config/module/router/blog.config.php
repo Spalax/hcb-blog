@@ -13,6 +13,24 @@ return array(
             ),
             'may_terminate' => false,
             'child_routes' => array(
+                'images' => array(
+                    'type' => 'literal',
+                    'options' => array(
+                        'route' => '/images'
+                    ),
+                    'may_terminate' => false,
+                    'child_routes' => array (
+                        'create' => array(
+                            'type' => 'method',
+                            'options' => array(
+                                'verb' => 'post',
+                                'defaults' => array(
+                                    'controller' => 'HcbBlog-Controller-Posts-Post-Data-Image-Create'
+                                )
+                            )
+                        )
+                    )
+                ),
                 'post' => array(
                     'type' => 'segment',
                     'options' => array(

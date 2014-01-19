@@ -2,6 +2,7 @@
 namespace HcbBlog;
 
 use HcbBlog\Options\ModuleOptions;
+use Zend\EventManager\Event;
 use Zend\Mvc\MvcEvent;
 
 class Module
@@ -21,6 +22,26 @@ class Module
         $options = new ModuleOptions(isset($config['hcb-blog']) ? $config['hcb-blog'] : array());
 
         $di->instanceManager()->addSharedInstance($options, 'HcbBlog\Options\ModuleOptions');
+        
+        $e->getApplication()->getEventManager()->attach('render', array($this, 'registerStrategy'), 100);
+    }
+
+    /**
+     * @param Event $e
+     */
+    public function registerStrategy($e)
+    {
+        $app = $e->getTarget();
+        $sm = $app->getServiceManager();
+
+        /* @var $di \Zend\Di\Di */
+        $di = $sm->get('di');
+
+        $view         = $sm->get('Zend\View\View');
+        $strategy = $di->get('Zf2FileUploader\View\Strategy\UploaderStrategy');
+
+        // Attach strategy, which is a listener aggregate, at high priority
+        $view->getEventManager()->attach($strategy, 110);
     }
 
     public function getConfig()

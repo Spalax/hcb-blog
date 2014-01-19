@@ -26,7 +26,12 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
     /**
      * @var LoadResourceInputInterface
      */
-    protected $resourceInputLoader;
+    protected $resourceInputPreviewLoader;
+
+    /**
+     * @var LoadResourceInputInterface
+     */
+    protected $resourceInputContentLoader;
 
     /**
      * @param Request $request
@@ -38,7 +43,8 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
     public function __construct(Request $request,
                                 Extractor $requestExtractor,
                                 Translator $translator,
-                                LoadResourceInputInterface $resourceInputLoader,
+                                LoadResourceInputInterface $resourceInputPreviewLoader,
+                                LoadResourceInputInterface $resourceInputContentLoader,
                                 Di $di)
     {
         parent::__construct($di);
@@ -75,9 +81,13 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
         $input->getFilterChain()->attach($di->get('Zend\Filter\StringTrim'));
         $this->add($input);
 
-        $this->resourceInputLoader = $resourceInputLoader;
-        $resourceInputLoader->setAllowEmpty(true);
-        $this->add($resourceInputLoader);
+        $this->resourceInputPreviewLoader = $resourceInputPreviewLoader;
+        $resourceInputPreviewLoader->setAllowEmpty(true);
+        $this->add($resourceInputPreviewLoader);
+
+        $this->resourceInputContentLoader = $resourceInputContentLoader;
+        $resourceInputContentLoader->setAllowEmpty(true);
+        $this->add($resourceInputContentLoader);
 
         $this->translate = $translator;
         $this->setData($requestExtractor->extract($request));
@@ -120,7 +130,8 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
      */
     public function getResources()
     {
-        return $this->resourceInputLoader->getResources();
+        return array_merge($this->resourceInputPreviewLoader->getResources(),
+                           $this->resourceInputContentLoader->getResources());
     }
 
     /**

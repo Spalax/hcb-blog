@@ -47,5 +47,13 @@ return array(
             'paginatorDataFetchService' => 'HcbBlog\Service\Posts\Post\FetchQbBuilderService',
             'viewModel' => 'HcbBlog-Posts-Post-Data-PaginatorViewModel'
         )
-    )
+    ),
+
+    'HcbBlog-Controller-Posts-Post-Data-Image-Create' => array(
+        'parameters' => array(
+            'saveService' => 'HcBackend-Images-Default-SaveService',
+            'uploaderModel' => 'HcbBlog-Posts-Post-Data-Image-UploaderModel',
+            'createResourceData' => 'HcbBlog-Posts-Post-Image-CreateResourceData'
+        )
+    ),
 );

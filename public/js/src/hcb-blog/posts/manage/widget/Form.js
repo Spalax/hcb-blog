@@ -4,6 +4,7 @@ define([
     "dijit/form/Form",
     "dijit/_WidgetsInTemplateMixin",
     "hc-backend/router",
+    "hc-backend/config",
     "dojo/text!./templates/Form.html",
     "hc-backend/component/form/_FormChangeableMixin",
     "dijit/form/_FormValueMixin",
@@ -14,7 +15,7 @@ define([
     "dijit/form/ValidationTextBox",
     "dojo-ckeditor/Editor"
 ], function(declare, array, Form, _WidgetsInTemplateMixin,
-            router, template, _FormChangeableMixin,
+            router, config, template, _FormChangeableMixin,
             _FormValueMixin, translation) {
 
     return declare([ Form, _FormChangeableMixin, _WidgetsInTemplateMixin ], {
@@ -35,7 +36,8 @@ define([
 
         postMixInProperties: function () {
             try {
-                this.filebrowserUploadUrl = router.assemble('/file', {}, true);
+                this.filebrowserUploadUrl = config.get('primaryRoute')+'/blog/posts/images';
+
                 this.watch('changed', function (name, oldValue, changed){
                     if (changed) {
                         this.saveButtonWidget.set('disabled', false);

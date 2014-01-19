@@ -6,26 +6,19 @@ return array(
         )
     ),
 
-    'HcbBlog\Data\Posts\Post\Delete' => array(
-        'parameters' => array(
-            'resourceInputLoader' => 'HcbBlog-Posts-Post-Data-InputLoadResourceInput'
-        )
-    ),
-
     'HcbBlog\Data\Posts\Post\Data\Save' => array(
         'parameters' => array(
-            'resourceInputLoader' => 'HcbBlog-Posts-Post-Data-InputLoadResourceInput'
+            'resourceInputPreviewLoader' => 'HcbBlog-Posts-Post-Data-InputLoadResourceInput-Preview',
+            'resourceInputContentLoader' => 'HcbBlog-Posts-Post-Data-InputLoadResourceInput-Content'
         )
     ),
 
-    'HcbBlog-Posts-Post-Data-InputLoadResourceInput' => array(
+    'HcbBlog-Posts-Post-Data-InputLoadResourceInput-Preview' => array(
+        'parameters' => array( 'name' => 'preview' )
+    ),
+
+    'HcbBlog-Posts-Post-Data-InputLoadResourceInput-Content' => array(
         'parameters' => array( 'name' => 'content' )
-    ),
-
-    'HcbBlog-Posts-Post-Data-ImagesSaveService' => array(
-        'parameters' => array(
-            'cleaner' => 'HcBackend-Images-Default-CleanerStrategy'
-        )
     ),
 
     'HcbBlog-Posts-Post-Data-PaginatorViewModel' => array(
@@ -62,6 +55,18 @@ return array(
     'HcbBlog\Service\Posts\DeleteService' => array(
         'parameters' => array(
             'deleteData' => 'HcbBlog-Posts-Collection'
+        )
+    ),
+
+    'HcbBlog-Posts-Post-Image-CreateResourceData' => array(
+        'parameters' => array(
+            'resourceInput' => 'HcbBlog-Posts-Post-Image-ResourceInput'
+        )
+    ),
+
+    'HcbBlog-Posts-Post-Image-ResourceInput' => array(
+        'parameters' => array(
+            'name' => 'upload'
         )
     )
 );

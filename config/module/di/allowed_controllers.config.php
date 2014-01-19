@@ -5,5 +5,6 @@ return array(
     'HcbBlog-Controller-Posts-Delete',
     'HcbBlog-Controller-Posts-Post-Data-Save',
     'HcbBlog-Controller-Posts-Post-Data-Create',
-    'HcbBlog-Controller-Posts-Post-Data-List'
+    'HcbBlog-Controller-Posts-Post-Data-List',
+    'HcbBlog-Controller-Posts-Post-Data-Image-Create'
 );
