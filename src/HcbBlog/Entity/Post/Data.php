@@ -13,7 +13,7 @@ use Zf2FileUploader\Entity\ImageInterface;
 /**
  * PostData
  *
- * @ORM\Table(name="blog_post_data")
+ * @ORM\Table(name="post_data")
  * @ORM\Entity
  */
 class Data implements EntityInterface, ImageBindInterface, PageBindInterface
@@ -60,7 +60,7 @@ class Data implements EntityInterface, ImageBindInterface, PageBindInterface
      *
      * @ORM\ManyToOne(targetEntity="HcbBlog\Entity\Post")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="blog_post_id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      * })
      */
     private $post = null;
@@ -79,9 +79,9 @@ class Data implements EntityInterface, ImageBindInterface, PageBindInterface
      * @var \Doctrine\Common\Collections\Collection
      *
      * @ORM\ManyToMany(targetEntity="HcBackend\Entity\Image", cascade={"persist"})
-     * @ORM\JoinTable(name="blog_post_data_image",
+     * @ORM\JoinTable(name="post_data_image",
      *   joinColumns={
-     *     @ORM\JoinColumn(name="blog_post_data_id", referencedColumnName="id")
+     *     @ORM\JoinColumn(name="post_data_id", referencedColumnName="id")
      *   },
      *   inverseJoinColumns={
      *     @ORM\JoinColumn(name="image_id", referencedColumnName="id")

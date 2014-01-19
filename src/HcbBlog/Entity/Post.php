@@ -13,7 +13,7 @@ use Zf2FileUploader\Entity\ImageInterface;
 /**
  * Post
  *
- * @ORM\Table(name="blog_post")
+ * @ORM\Table(name="post")
  * @ORM\Entity
  */
 class Post implements EntityInterface
