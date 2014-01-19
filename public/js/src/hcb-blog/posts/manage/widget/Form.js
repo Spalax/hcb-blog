@@ -1,21 +1,23 @@
 define([
     "dojo/_base/declare",
+    "dojo/_base/array",
     "dijit/form/Form",
     "dijit/_WidgetsInTemplateMixin",
-    "hc-backend/component/form/_ResourceSaverMixin",
     "hc-backend/router",
     "dojo/text!./templates/Form.html",
-    "dojo-ckeditor/Editor",
+    "hc-backend/component/form/_FormChangeableMixin",
+    "dijit/form/_FormValueMixin",
     "dojo/i18n!../../../nls/Add",
     "dijit/form/TextBox",
     "dijit/form/Textarea",
     "dojo-common/form/BusyButton",
-    "dijit/form/ValidationTextBox"
-], function(declare, Form, _WidgetsInTemplateMixin,
-            _ResourceSaverMixin, router, template,
-            Editor, translation) {
+    "dijit/form/ValidationTextBox",
+    "dojo-ckeditor/Editor"
+], function(declare, array, Form, _WidgetsInTemplateMixin,
+            router, template, _FormChangeableMixin,
+            _FormValueMixin, translation) {
 
-    return declare([ Form, _ResourceSaverMixin, _WidgetsInTemplateMixin ], {
+    return declare([ Form, _FormChangeableMixin, _WidgetsInTemplateMixin ], {
         //  summary:
         //      Form widget for adding page to the CMS database
 
@@ -29,10 +31,20 @@ define([
 
         doLayout: false,
         isLayoutContainer: false,
+        __formConnectors: [],
 
         postMixInProperties: function () {
             try {
                 this.filebrowserUploadUrl = router.assemble('/file', {}, true);
+                this.watch('changed', function (name, oldValue, changed){
+                    if (changed) {
+                        this.saveButtonWidget.set('disabled', false);
+                        this.resetButtonWidget.set('disabled', false);
+                    } else {
+                        this.saveButtonWidget.set('disabled', true);
+                        this.resetButtonWidget.set('disabled', true);
+                    }
+                })
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;
@@ -49,7 +61,7 @@ define([
                 }
 
                 if (values['lang'] && values['lang'].length) {
-                    this.__lang = values['lang'];
+                    this.set('lang', values['lang']);
                 }
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
@@ -65,11 +77,11 @@ define([
                     values['id'] = this.__id;
                 }
 
-                if (!this.__lang) {
+                if (!this.lang) {
                     throw "Lang must be defined for the form";
                 }
 
-                values['lang'] = this.__lang;
+                values['lang'] = this.get('lang');
 
                 return values;
             } catch (e) {

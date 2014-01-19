@@ -17,33 +17,12 @@ define([
                 this.saveService = new SaverService({polyglotCollectionStore: PostsStore});
                 this.saveService.on('created', lang.hitch(this, 'onEntryRefreshed'));
                 this.saveService.on('updated', lang.hitch(this, 'onEntryRefreshed'));
+
+                this.own(this.saveService);
                 this.inherited(arguments);
             } catch (e) {
                 console.error(this.declaredClass, arguments, e);
                 throw e;
-            }
-        },
-
-        onEntryRefreshed: function (object) {
-            try {
-                if (!object || !object.data) {
-                    throw "Invalid object given for onEntryRefreshed, data properties is a must";
-                }
-                data = object.data;
-                console.log("onEntryRefreshed >>>", data);
-                array.forEach(this.getChildren(), function (child) {
-                    try {
-                        if (child.get('lang') == data.lang) {
-                            child.set('value', data);
-                        }
-                    } catch (e) {
-                         console.error(this.declaredClass, arguments, e);
-                         throw e;
-                    }
-                });
-            } catch (e) {
-                 console.error(this.declaredClass, arguments, e);
-                 throw e;
             }
         },
 

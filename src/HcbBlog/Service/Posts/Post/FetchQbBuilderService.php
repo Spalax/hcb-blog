@@ -4,12 +4,26 @@ namespace HcbBlog\Service\Posts\Post;
 use Doctrine\Common\Collections\ArrayCollection;
 use HcBackend\Service\Fetch\Paginator\ArrayCollection\ResourceDataServiceInterface;
 use Doctrine\ORM\QueryBuilder;
+use HcBackend\Service\Filtration\Collection\FiltrationServiceInterface;
 use HcbBlog\Entity\Post;
 use HcbBlog\Service\Exception\InvalidResourceException;
 use Zend\Stdlib\Parameters;
 
 class FetchQbBuilderService implements ResourceDataServiceInterface
 {
+    /**
+     * @var FiltrationServiceInterface
+     */
+    protected $filtrationService;
+
+    /**
+     * @param FiltrationServiceInterface $filtrationService
+     */
+    public function __construct(FiltrationServiceInterface $filtrationService)
+    {
+        $this->filtrationService = $filtrationService;
+    }
+
     /**
      * @param Post $postEntity
      * @param Parameters $params
@@ -23,6 +37,11 @@ class FetchQbBuilderService implements ResourceDataServiceInterface
         }
 
         $collection = $postEntity->getData();
-        return new ArrayCollection($collection->toArray());
+        $arrayCollection = new ArrayCollection($collection->toArray());
+        if (is_null($params)) {
+            return $arrayCollection;
+        }
+
+        return $this->filtrationService->apply($params, $arrayCollection);
     }
 }

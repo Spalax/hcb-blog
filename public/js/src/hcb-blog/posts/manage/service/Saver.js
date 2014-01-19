@@ -37,12 +37,18 @@ define([
 
             _identifierSetter: function (identifier) {
                 try {
+                    if (identifier == this.identifier) {
+                        return;
+                    }
+
                     var target = this.polyglotCollectionStore
                                      .getTarget(identifier)+this.polyglotCollectionPath;
 
                     this.polyglotStore = Cache(JsonRest({target: target,
                                                          idProperty: this.polyglotCollectionId}),
                                                Memory({idProperty: this.polyglotCollectionId}));
+
+                    this.identifier = identifier;
                 } catch (e) {
                      console.error(this.declaredClass, arguments, e);
                      throw e;

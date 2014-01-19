@@ -50,11 +50,14 @@
            data-dojo-attach-point="saveButtonWidget"
            data-dojo-attach-event="onClick: save"
            data-dojo-props='name:"send",
+                            disabled: true,
                             label:"${!_t.addButton}"' />
 
     <input class="${baseClass}ResetButton"
            data-dojo-type="dijit/form/Button"
+           data-dojo-attach-point="resetButtonWidget"
            data-dojo-attach-event="onClick: reset"
            data-dojo-props='name:"reset",
+                            disabled: true,
                             label:"${!_t.resetButton}"' />
 </form>

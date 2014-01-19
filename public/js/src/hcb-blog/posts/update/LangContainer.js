@@ -17,31 +17,10 @@ define([
         _setIdentifierAttr: function (identifier) {
             try {
                 this.saveService.set('identifier', identifier);
-                var _store = this.saveService.get('polyglotStore');
 
-                _store.query().forEach(lang.hitch(this, function (item) {
-                    try {
-                        array.some(this.getChildren(), function (child) {
-                            try {
-                                if (child.get('lang') == item.lang) {
-                                    console.log("Found form for language >>",
-                                                item.lang, _store.get(item.id));
-                                    child.set('identifier', identifier);
-                                    child.set('value', item);
-                                    return true;
-                                }
-                            } catch (e) {
-                                console.error(this.declaredClass, arguments, e);
-                                throw e;
-                            }
-                        });
-                    } catch (e) {
-                        console.error(this.declaredClass, arguments, e);
-                        throw e;
-                    }
-                }));
-
-                this.inherited(arguments);
+                array.forEach(this.getChildren(), function (child) {
+                    child.set('identifier', identifier);
+                });
             } catch (e) {
                 console.error(this.declaredClass, arguments, e);
                 throw e;

@@ -1,10 +1,11 @@
 define([
     "dojo/_base/declare",
+    "dojo/_base/array",
     "hc-backend/layout/main/content/_ContentMixin",
     "hc-backend/layout/main/content/_RebuildContainerWidgetsMixin",
     "dijit/_TemplatedMixin",
     "dojo/text!./templates/Container.html"
-], function(declare, _ContentMixin, _RebuildContainerWidgetsMixin,
+], function(declare, array, _ContentMixin, _RebuildContainerWidgetsMixin,
             _TemplatedMixin, template) {
 
     return declare([ _ContentMixin, _RebuildContainerWidgetsMixin, _TemplatedMixin ], {
@@ -34,9 +35,8 @@ define([
 
         destroyWidgets: function () {
             try {
-                this._langContainerWidget && this.removeChild(this._langContainerWidget);
-                this._langContainerWidget &&  this._langContainerWidget.destroyRecursive();
-
+                this._langContainerWidget.destroyRecursive();
+                this.removeChild(this._langContainerWidget);
                 this._langContainerWidget = null;
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);

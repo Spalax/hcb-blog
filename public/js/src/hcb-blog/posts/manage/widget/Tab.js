@@ -2,11 +2,13 @@ define([
     "dojo/_base/declare",
     "dojo/_base/lang",
     "dojo/on",
+    "dojo/aspect",
     "hcb-blog/posts/manage/widget/Form",
     "hc-backend/layout/ContentPaneHash",
-    "dojo/dom-class"
-], function(declare, lang, on, Form,
-            ContentPane, domClass) {
+    "dojo/dom-class",
+    "dojo-underscore/underscore"
+], function(declare, lang, on, aspect, Form,
+            ContentPane, domClass, u) {
 
     return declare([ ContentPane ], {
 
@@ -14,10 +16,39 @@ define([
         saveService: null,
         lang: '',
 
+        load: function () {
+            try {
+                var _store = this.saveService.get('polyglotStore');
+                var _res = _store.query({lang: this.lang});
+
+                _res.then(lang.hitch(this, function (res){
+                    u.each(u.values(res), function (item){
+                        console.log("Found form for language >>",
+                            this.lang, item);
+                        this.set('value', item);
+                    }, this);
+                }), function (err) {
+                  console.error("Error in asynchronous call", err, arguments);
+                })
+            } catch (e) {
+                 console.error(this.declaredClass, arguments, e);
+                 throw e;
+            }
+        },
+
         onShow: function () {
             try {
                 if (!this.form) {
                     this.init();
+                }
+
+                if (!this.identifier) {
+                    var watch = this.watch('identifier', function (){
+                        watch.unwatch();
+                        this.load();
+                    })
+                } else {
+                    this.load();
                 }
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
@@ -30,7 +61,7 @@ define([
                 if (this.identifier) {
                     return this.router.assemble({id: this.identifier, lang: this.lang}, '/:lang');
                 } else {
-                    return this.router.assemble({lang: this.lang});
+                    return this.router.assemble({lang: this.lang}, '/:lang');
                 }
             } catch (e) {
                 console.error(this.declaredClass, arguments, e);
@@ -54,14 +85,33 @@ define([
             }
         },
 
+        _setFormAttr: function (form) {
+            try {
+                this.form = form;
+                this.own(this.form);
+            } catch (e) {
+                 console.error(this.declaredClass, arguments, e);
+                 throw e;
+            }
+        },
+
+        destroy: function () {
+            try {
+                this.inherited(arguments);
+                console.log("Tab lang destroyed", this.lang);
+            } catch (e) {
+                 console.error(this.declaredClass, arguments, e);
+                 throw e;
+            }
+        },
+
         init: function () {
             try {
                 this.set('form', new Form());
 
                 var domNode = this.form.domNode;
 
-                this.form.set('value', {lang: this.lang});
-
+                this.form.set('lang', this.lang);
                 this.form.on('ready', function (){
                     domClass.remove(domNode, 'dijitHidden');
                 });
@@ -76,7 +126,7 @@ define([
                             .then(function () {
                                 try {
                                     // TODO:
-                                    //  Do something after create initated.
+                                    //  Do something after create initiated.
                                 } catch (e) {
                                     console.error("Asynchronous call exception", arguments, e);
                                     throw e;
@@ -92,7 +142,8 @@ define([
                     }
                 }));
 
-                this.attr('content', domNode);
+                this.addChild(this.form);
+//                this.attr('content', domNode);
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);
                  throw e;
