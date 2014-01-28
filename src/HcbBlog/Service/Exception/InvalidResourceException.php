@@ -1,6 +1,6 @@
 <?php
 namespace HcbBlog\Service\Exception;
 
-use HcBackend\Service\Fetch\Paginator\Exception\InvalidResourceExceptionInterface;
+use HcCore\Service\Fetch\Paginator\Exception\InvalidResourceException as BaseInvalidResourceException;
 
-class InvalidResourceException extends InvalidArgumentException implements InvalidResourceExceptionInterface {}
+class InvalidResourceException extends BaseInvalidResourceException {}
