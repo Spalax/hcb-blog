@@ -58,7 +58,7 @@ class Data implements EntityInterface, ImageBindInterface, PageBindInterface
     /**
      * @var Post
      *
-     * @ORM\ManyToOne(targetEntity="HcbBlog\Entity\Post")
+     * @ORM\ManyToOne(targetEntity="HcbBlog\Entity\Post", inversedBy="data")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="post_id", referencedColumnName="id")
      * })
