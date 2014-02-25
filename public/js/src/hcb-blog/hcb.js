@@ -9,6 +9,7 @@ define([
         // summary:
         //      Clients package will provide user to manage web site clients
         title: translation['packageTitle'],
+        iconClass: 'blogIcon',
 
         postCreate: function () {
             try {
