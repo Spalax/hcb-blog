@@ -1,49 +1,70 @@
 <form data-dojo-attach-point="containerNode" class="dijitHidden">
-    ${!_t.titleLabel}
-    <input class="${baseClass}Title"
-           data-dojo-type="dijit/form/ValidationTextBox"
-           data-dojo-props='name:"title",
-                            required: true,
-                            maxLength: 500' />
-    ${!_t.titleHelp}
 
-    ${!_t.urlLabel}
-    <input class="${baseClass}Url" data-dojo-type="dijit/form/TextBox" data-dojo-props='name:"pageUrl"' />
-    ${!_t.urlHelp}
+    <div class="row">
+        <label>${!_t.titleLabel}</label>
+        <input class="${baseClass}Title"
+               data-dojo-type="dijit/form/ValidationTextBox"
+               data-dojo-props='name:"title",
+                                required: true,
+                                maxLength: 500' />
+        <div class="field-description">
+            ${!_t.titleHelp}
+        </div>
+    </div>
 
-    ${!_t.metaTitleLabel}
-    <input class="${baseClass}Title"
-           data-dojo-type="dijit/form/Textarea"
-           data-dojo-props='name:"pageTitle", maxLength: 300' />
-    ${!_t.metaTitleHelp}
+    <div class="row">
+        <label>${!_t.urlLabel}</label>
+        <input class="${baseClass}Url"
+               data-dojo-type="dijit/form/TextBox"
+               data-dojo-props='name:"pageUrl"' />
+        <div class="field-description">
+            ${!_t.urlHelp}
+        </div>
+    </div>
 
-    ${!_t.metaDescriptionLabel}
-    <input class="${baseClass}Description"
-           data-dojo-type="dijit/form/Textarea"
-           data-dojo-props='name:"pageDescription", maxLength: 300' />
-    ${!_t.metaDescriptionHelp}
+    <div class="row">
+        <label>${!_t.metaTitleLabel}</label>
+        <input class="${baseClass}Title"
+               data-dojo-type="dijit/form/Textarea"
+               data-dojo-props='name:"pageTitle", maxLength: 300' />
+        <div class="field-description">${!_t.metaTitleHelp}</div>
+    </div>
 
-    ${!_t.metaKeywordsLabel}
-    <input class="${baseClass}Keywords"
-           data-dojo-type="dijit/form/Textarea"
-           data-dojo-props='name:"pageKeywords", maxLength: 300' />
-    ${!_t.metaKeywordsHelp}
+    <div class="row">
+        <label>${!_t.metaDescriptionLabel}</label>
+        <input class="${baseClass}Description"
+               data-dojo-type="dijit/form/Textarea"
+               data-dojo-props='name:"pageDescription", maxLength: 300' />
+        <div class="field-description">${!_t.metaDescriptionHelp}</div>
+    </div>
 
-    ${!_t.previewLabel}
-    <div class="${baseClass}Editor"
-         data-dojo-type="dojo-ckeditor/Editor"
-         data-dojo-attach-point="previewEditorWidget"
-         data-dojo-props='name:"preview",
-                          settings:{filebrowserUploadUrl: "${filebrowserUploadUrl}"}'></div>
-    ${!_t.previewHelp}
+    <div class="row">
+        <label>${!_t.metaKeywordsLabel}</label>
+        <input class="${baseClass}Keywords"
+               data-dojo-type="dijit/form/Textarea"
+               data-dojo-props='name:"pageKeywords", maxLength: 300' />
+        <div class="field-description">${!_t.metaKeywordsHelp}</div>
+    </div>
 
-    ${!_t.contentLabel}
-    <div class="${baseClass}Editor"
-         data-dojo-type="dojo-ckeditor/Editor"
-         data-dojo-attach-point="contentEditorWidget"
-         data-dojo-props='name:"content",
-                          settings: {filebrowserUploadUrl: "${filebrowserUploadUrl}"}'></div>
-    ${!_t.contentHelp}
+    <div class="row">
+        ${!_t.previewLabel}
+        <div class="${baseClass}Editor"
+             data-dojo-type="dojo-ckeditor/Editor"
+             data-dojo-attach-point="previewEditorWidget"
+             data-dojo-props='name:"preview",
+                              settings:{filebrowserUploadUrl: "${filebrowserUploadUrl}"}'></div>
+        <div class="field-description">${!_t.previewHelp}</div>
+    </div>
+
+    <div class="row">
+        ${!_t.contentLabel}
+        <div class="${baseClass}Editor"
+             data-dojo-type="dojo-ckeditor/Editor"
+             data-dojo-attach-point="contentEditorWidget"
+             data-dojo-props='name:"content",
+                              settings: {filebrowserUploadUrl: "${filebrowserUploadUrl}"}'></div>
+        <div class="field-description">${!_t.contentHelp}</div>
+    </div>
 
     <input class="${baseClass}AddButton"
            data-dojo-type="dojo-common/form/BusyButton"
