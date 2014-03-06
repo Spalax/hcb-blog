@@ -6,7 +6,7 @@ define([
     "hcb-blog/posts/manage/widget/Form",
     "hc-backend/layout/ContentPaneHash",
     "dojo/dom-class",
-    "dojo-underscore/underscore"
+    "underscore"
 ], function(declare, lang, on, aspect, Form,
             ContentPane, domClass, u) {
 
