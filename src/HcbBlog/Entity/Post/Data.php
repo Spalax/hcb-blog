@@ -2,10 +2,10 @@
 namespace HcbBlog\Entity\Post;
 
 use HcBackend\Entity\EntityInterface;
-use HcBackend\Entity\Page;
 use HcBackend\Entity\PageBindInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use HcBackend\Entity\PageInterface;
 use HcbBlog\Entity\Post;
 use HcBackend\Entity\ImageBindInterface;
 use Zf2FileUploader\Entity\ImageInterface;
@@ -125,10 +125,10 @@ class Data implements EntityInterface, ImageBindInterface, PageBindInterface
     /**
      * Set page
      *
-     * @param \HcBackend\Entity\Page $page
+     * @param \HcBackend\Entity\PageInterface $page
      * @return Data
      */
-    public function setPage(Page $page = null)
+    public function setPage(PageInterface $page)
     {
         $this->page = $page;
 
