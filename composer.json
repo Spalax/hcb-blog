@@ -28,7 +28,7 @@
         "php": ">=5.3",
         "huskycms/hc-backend": "dev-master",
         "huskycms/hc-core": "dev-master",
-        "zendframework/zendframework": ">=2.3",
+        "zendframework/zendframework": "2.3.0",
         "spalax/zf2-libs": "dev-master",
         "spalax/zf2-file-uploader": "dev-master",
         "doctrine/doctrine-module": "0.*",
