@@ -1,7 +1,7 @@
 <?php
 namespace HcbBlog\Service\Posts\Post\Data;
 
-use HcBackend\Entity\EntityInterface;
+use HcCore\Entity\EntityInterface;
 use HcBackend\Service\ResourceCommandInterface;
 use HcbBlog\Data\Posts\Post\Data\SaveInterface;
 use HcbBlog\Entity\Post;

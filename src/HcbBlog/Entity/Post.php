@@ -1,7 +1,7 @@
 <?php
 namespace HcbBlog\Entity;
 
-use HcBackend\Entity\EntityInterface;
+use HcCore\Entity\EntityInterface;
 use HcBackend\Entity\Page;
 use HcBackend\Entity\PageBindInterface;
 use Doctrine\Common\Collections\ArrayCollection;

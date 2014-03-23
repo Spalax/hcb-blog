@@ -1,7 +1,7 @@
 <?php
 namespace HcbBlog\Entity\Post;
 
-use HcBackend\Entity\EntityInterface;
+use HcCore\Entity\EntityInterface;
 use HcBackend\Entity\PageBindInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
