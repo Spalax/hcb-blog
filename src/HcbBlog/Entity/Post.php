@@ -1,14 +1,10 @@
 <?php
 namespace HcbBlog\Entity;
 
+use HcbBlog\Entity\Post\Type;
 use HcCore\Entity\EntityInterface;
-use HcBackend\Entity\Page;
-use HcBackend\Entity\PageBindInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use HcbBlog\Entity\Post\Data;
-use Zf2FileUploader\Entity\ImageBindInterface;
-use Zf2FileUploader\Entity\ImageInterface;
 
 /**
  * Post
@@ -35,6 +31,16 @@ class Post implements EntityInterface
     private $enabled = 0;
 
     /**
+     * @var Type
+     *
+     * @ORM\ManyToOne(targetEntity="HcbBlog\Entity\Post\Type", inversedBy="post")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="post_type_id", referencedColumnName="id")
+     * })
+     */
+    private $type;
+
+    /**
      * @var Data
      *
      * @ORM\OneToMany(targetEntity="HcbBlog\Entity\Post\Data", mappedBy="post")
@@ -50,6 +56,14 @@ class Post implements EntityInterface
     private $createdTimestamp;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->data = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -62,8 +76,8 @@ class Post implements EntityInterface
     /**
      * Set enabled
      *
-     * @param int $enabled
-     * @return Data
+     * @param integer $enabled
+     * @return Post
      */
     public function setEnabled($enabled)
     {
@@ -75,7 +89,7 @@ class Post implements EntityInterface
     /**
      * Get enabled
      *
-     * @return int
+     * @return integer 
      */
     public function getEnabled()
     {
@@ -104,12 +118,28 @@ class Post implements EntityInterface
     {
         return $this->createdTimestamp;
     }
+
     /**
-     * Constructor
+     * Set type
+     *
+     * @param \HcbBlog\Entity\Post\Type $type
+     * @return Post
      */
-    public function __construct()
+    public function setType(\HcbBlog\Entity\Post\Type $type = null)
     {
-        $this->data = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \HcbBlog\Entity\Post\Type 
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**

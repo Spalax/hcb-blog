@@ -78,15 +78,7 @@ class Data implements EntityInterface, ImageBindInterface, PageBindInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="HcBackend\Entity\Image", cascade={"persist"})
-     * @ORM\JoinTable(name="post_data_image",
-     *   joinColumns={
-     *     @ORM\JoinColumn(name="post_data_id", referencedColumnName="id")
-     *   },
-     *   inverseJoinColumns={
-     *     @ORM\JoinColumn(name="image_id", referencedColumnName="id")
-     *   }
-     * )
+     * @ORM\OneToMany(targetEntity="HcbBlog\Entity\Post\Data\Image", mappedBy="data")
      */
     private $image;
 
@@ -103,14 +95,6 @@ class Data implements EntityInterface, ImageBindInterface, PageBindInterface
      * @ORM\Column(name="created_timestamp", type="datetime", nullable=false)
      */
     private $createdTimestamp;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->image = new ArrayCollection();
-    }
 
     /**
      * Get id
@@ -337,5 +321,13 @@ class Data implements EntityInterface, ImageBindInterface, PageBindInterface
     public function getPost()
     {
         return $this->post;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->image = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }
