@@ -61,7 +61,16 @@ class SaveService
 
             $this->entityManager->persist($postDataEntity);
 
-            $postDataEntity->setTitle($saveData->getTitle());
+            $postEntity = $postDataEntity->getPost();
+            $title = $saveData->getTitle();
+            if (preg_match('/^news/', $title)) {
+                $title = str_replace('news', '', $title);
+                $postEntity->setType($this->entityManager->getReference('HcbBlog\Entity\Post\Type', 1));
+            } else {
+                $postEntity->setType($this->entityManager->getReference('HcbBlog\Entity\Post\Type', 2));
+            }
+
+            $postDataEntity->setTitle($title);
             $postDataEntity->setPreview($saveData->getPreview());
             $postDataEntity->setContent($saveData->getContent());
 

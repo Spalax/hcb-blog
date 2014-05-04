@@ -48,6 +48,9 @@ class Extractor implements ExtractorInterface
 
         $localData =array('id'=>$postData->getId(),
                           'title'=>$postData->getTitle(),
+                          'type' => array(
+                              'article', 'news'
+                          ),
                           'lang'=>$postData->getLang(),
                           'preview'=>$postData->getPreview(),
                           'content'=>$postData->getContent(),

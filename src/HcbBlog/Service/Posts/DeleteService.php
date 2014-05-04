@@ -1,8 +1,8 @@
 <?php
 namespace HcbBlog\Service\Posts;
 
-use HcBackend\Data\Collection\Entities\ByIdsInterface;
-use HcBackend\Service\CommandInterface;
+use HcCore\Data\Collection\Entities\ByIdsInterface;
+use HcCore\Service\CommandInterface;
 use HcbBlog\Entity\Post as PostEntity;
 use Doctrine\ORM\EntityManager;
 use Zf2Libs\Stdlib\Service\Response\Messages\Response;

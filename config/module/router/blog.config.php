@@ -31,6 +31,26 @@ return array(
                         )
                     )
                 ),
+
+                'type' => array(
+                    'type' => 'literal',
+                    'options' => array(
+                        'route' => '/type'
+                    ),
+                    'may_terminate' => false,
+                    'child_routes' => array (
+                        'list' => array(
+                            'type' => 'method',
+                            'options' => array(
+                                'verb' => 'get',
+                                'defaults' => array(
+                                    'controller' => 'HcbBlog-Controller-Posts-Type-List'
+                                )
+                            )
+                        )
+                    )
+                ),
+
                 'post' => array(
                     'type' => 'segment',
                     'options' => array(

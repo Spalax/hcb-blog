@@ -41,6 +41,13 @@ return array(
         )
     ),
 
+    'HcbBlog-Controller-Posts-Type-List' => array(
+        'parameters' => array(
+            'paginatorDataFetchService' => 'HcbBlog\Service\Posts\Post\Type\FetchQbBuilderService',
+            'viewModel' => 'HcbBlog-Posts-Post-Type-PaginatorViewModel'
+        )
+    ),
+
     'HcbBlog-Controller-Posts-Post-Data-List' => array(
         'parameters' => array(
             'fetchService' => 'HcbBlog-Posts-Post-FetchService',

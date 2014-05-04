@@ -1,8 +1,7 @@
 <?php
 namespace HcbBlog\Stdlib\Service\Response\Posts;
 
-use Zend\I18n\Translator\Translator;
-use Zf2Libs\Stdlib\Data\DataInterface;
+use Zf2Libs\Stdlib\Response\DataInterface;
 use Zf2Libs\Stdlib\Service\Response\Messages\Response;
 use HcbBlog\Stdlib\Response\Exception\InvalidArgumentException;
 

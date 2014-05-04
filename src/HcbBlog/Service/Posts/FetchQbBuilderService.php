@@ -1,8 +1,8 @@
 <?php
 namespace HcbBlog\Service\Posts;
 
-use HcBackend\Service\Fetch\Paginator\QueryBuilder\DataServiceInterface;
-use HcBackend\Service\Sorting\SortingServiceInterface;
+use HcCore\Service\Fetch\Paginator\QueryBuilder\DataServiceInterface;
+use HcCore\Service\Sorting\SortingServiceInterface;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use Zend\Stdlib\Parameters;

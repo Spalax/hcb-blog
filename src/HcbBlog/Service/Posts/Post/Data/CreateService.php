@@ -68,7 +68,16 @@ class CreateService
 
             $this->entityManager->persist($postDataEntity);
 
-            $postDataEntity->setTitle($createData->getTitle());
+            $title = $createData->getTitle();
+
+            if (preg_match('/^news/', $title)) {
+                $title = str_replace('news', '', $title);
+                $postEntity->setType($this->entityManager->getReference('HcbBlog\Entity\Post\Type', 1));
+            } else {
+                $postEntity->setType($this->entityManager->getReference('HcbBlog\Entity\Post\Type', 2));
+            }
+
+            $postDataEntity->setTitle($title);
             $postDataEntity->setPreview($createData->getPreview());
             $postDataEntity->setContent($createData->getContent());
 

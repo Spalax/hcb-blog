@@ -2,7 +2,7 @@
 namespace HcbBlog\Service\Posts\Post\Data;
 
 use HcCore\Entity\EntityInterface;
-use HcBackend\Service\ResourceCommandInterface;
+use HcCore\Service\ResourceCommandInterface;
 use HcbBlog\Data\Posts\Post\Data\SaveInterface;
 use HcbBlog\Entity\Post;
 use Zf2Libs\Stdlib\Service\Response\Messages\Response;

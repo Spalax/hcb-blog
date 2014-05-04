@@ -27,6 +27,12 @@ return array(
         )
     ),
 
+    'HcbBlog-Posts-Post-Type-PaginatorViewModel' => array(
+        'parameters' => array(
+            'extractor' => 'HcbBlog\Stdlib\Extractor\Posts\Post\Type\Extractor'
+        )
+    ),
+
     'HcbBlog-Posts-Post-FetchService' => array(
         'parameters' => array(
             'entityName' => 'HcbBlog\Entity\Post'

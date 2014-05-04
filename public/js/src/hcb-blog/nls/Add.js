@@ -10,6 +10,9 @@ define({ root:
         urlLabel: "Path/URI",
         urlHelp: "Url displayed in browser address bar, if not defined will automatically generated from title",
 
+        typeLabel: "Type",
+        typeHelp: "Type of the current post",
+
         metaTitleLabel: "Page Title",
         metaTitleHelp: "Text which will be displayed as page title",
 

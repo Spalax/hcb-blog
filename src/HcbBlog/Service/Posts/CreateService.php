@@ -1,7 +1,7 @@
 <?php
 namespace HcbBlog\Service\Posts;
 
-use HcBackend\Service\CommandInterface;
+use HcCore\Service\CommandInterface;
 use Doctrine\ORM\EntityManager;
 use HcbBlog\Entity\Post;
 use HcbBlog\Stdlib\Service\Response\Posts\CreateResponse as CreateResponse;
@@ -38,6 +38,7 @@ class CreateService implements CommandInterface
             $this->entityManager->beginTransaction();
 
             $post = new Post();
+            $post->setType($this->entityManager->getReference('HcbBlog\Entity\Post\Type', 1));
             $post->setCreatedTimestamp(new \DateTime());
 
             $this->entityManager->persist($post);

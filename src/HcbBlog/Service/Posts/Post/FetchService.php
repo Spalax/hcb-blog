@@ -1,7 +1,7 @@
 <?php
 namespace HcbBlog\Service\Posts\Post;
 
-use HcBackend\Service\FetchServiceInterface;
+use HcCore\Service\FetchServiceInterface;
 use Doctrine\ORM\EntityManager;
 
 class FetchService implements FetchServiceInterface
