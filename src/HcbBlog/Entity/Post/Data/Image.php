@@ -13,10 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Image implements EntityInterface
 {
     /**
-     * @var \Zf2FileUploader\Entity\Image
+     * @var \HcBackend\Entity\Image
      *
      * @ORM\Id
-     * @ORM\OneToOne(targetEntity="\Zf2FileUploader\Entity\Image")
+     * @ORM\OneToOne(targetEntity="\HcBackend\Entity\Image")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="image_id", referencedColumnName="id")
      * })
@@ -67,10 +67,10 @@ class Image implements EntityInterface
     /**
      * Set image
      *
-     * @param \Zf2FileUploader\Entity\Image $image
+     * @param \HcBackend\Entity\Image $image
      * @return Image
      */
-    public function setImage(\Zf2FileUploader\Entity\Image $image)
+    public function setImage(\HcBackend\Entity\Image $image)
     {
         $this->image = $image;
 
@@ -80,7 +80,7 @@ class Image implements EntityInterface
     /**
      * Get image
      *
-     * @return \Zf2FileUploader\Entity\Image 
+     * @return \HcBackend\Entity\Image
      */
     public function getImage()
     {
