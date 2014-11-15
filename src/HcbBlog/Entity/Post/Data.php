@@ -78,9 +78,25 @@ class Data implements EntityInterface, ImageBindInterface, PageBindInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\OneToMany(targetEntity="HcbBlog\Entity\Post\Data\Image", mappedBy="data")
+     * @ORM\ManyToMany(targetEntity="HcBackend\Entity\Image")
+     * @ORM\JoinTable(name="post_data_image",
+     *   joinColumns={
+     *     @ORM\JoinColumn(name="post_data_id", referencedColumnName="id")
+     *   },
+     *   inverseJoinColumns={
+     *     @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     *   }
+     * )
      */
     private $image;
+
+    /**
+     * @var \HcbBlog\Entity\Post\Data\Image
+     *
+     * @ORM\OneToMany(targetEntity="HcbBlog\Entity\Post\Data\Image", mappedBy="data")
+     *
+     */
+    private $dataImage;
 
     /**
      * @var \DateTime
@@ -324,10 +340,44 @@ class Data implements EntityInterface, ImageBindInterface, PageBindInterface
     }
 
     /**
+     * Add dataImage
+     *
+     * @param \HcbBlog\Entity\Post\Data\Image $dataImage
+     * @return Data
+     */
+    public function addDataImage(\HcbBlog\Entity\Post\Data\Image $dataImage)
+    {
+        $this->dataImage[] = $dataImage;
+
+        return $this;
+    }
+
+    /**
+     * Remove dataImage
+     *
+     * @param \HcbBlog\Entity\Post\Data\Image $dataImage
+     */
+    public function removeDataImage(\HcbBlog\Entity\Post\Data\Image $dataImage)
+    {
+        $this->dataImage->removeElement($dataImage);
+    }
+
+    /**
+     * Get dataImage
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDataImage()
+    {
+        return $this->dataImage;
+    }
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->image = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dataImage = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
 }

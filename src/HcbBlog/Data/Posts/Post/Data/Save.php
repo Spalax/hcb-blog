@@ -62,6 +62,14 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
                     ->setRequired(true);
         $this->add($input);
 
+        $this->resourceInputPreviewLoader = $resourceInputPreviewLoader;
+        $resourceInputPreviewLoader->setAllowEmpty(true);
+        $this->add($resourceInputPreviewLoader);
+
+        $this->resourceInputContentLoader = $resourceInputContentLoader;
+        $resourceInputContentLoader->setAllowEmpty(true);
+        $this->add($resourceInputContentLoader);
+
         /* @var $input \Zend\InputFilter\Input */
         $input = $di->get('Zend\InputFilter\Input', array('name'=>'preview'))
             ->setRequired(false)
@@ -76,15 +84,8 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
         $input->getFilterChain()->attach($di->get('Zend\Filter\StringTrim'));
         $this->add($input);
 
-        $this->resourceInputPreviewLoader = $resourceInputPreviewLoader;
-        $resourceInputPreviewLoader->setAllowEmpty(true);
-        $this->add($resourceInputPreviewLoader);
-
-        $this->resourceInputContentLoader = $resourceInputContentLoader;
-        $resourceInputContentLoader->setAllowEmpty(true);
-        $this->add($resourceInputContentLoader);
-
         $this->translate = $translator;
+
         $this->setData($requestExtractor->extract($request));
     }
 
