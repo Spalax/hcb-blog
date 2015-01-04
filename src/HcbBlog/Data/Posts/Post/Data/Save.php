@@ -51,8 +51,10 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
         /* @var $input \Zend\InputFilter\Input */
         $input = $di->get('Zend\InputFilter\Input', array('name'=>'title'));
         $input->setRequired(true);
-        $input->getValidatorChain()->attach($di->get('Zend\Validator\StringLength',
-            array('options'=>array('max'=>500))));
+        $input->getValidatorChain()
+              ->attach($di->get('Zend\Validator\StringLength',
+                                array('options'=>array('max'=>500))));
+
         $input->getFilterChain()->attach($di->get('Zend\Filter\StringTrim'));
         $this->add($input);
 
@@ -84,6 +86,20 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
         $input->getFilterChain()->attach($di->get('Zend\Filter\StringTrim'));
         $this->add($input);
 
+        /* @var $input \Zend\InputFilter\Input */
+        $input = $di->get('Zend\InputFilter\Input', array('name'=>'tags[]'))
+            ->setRequired(false)
+            ->setAllowEmpty(true);
+        $this->add($input);
+
+        /* @var $input \Zend\InputFilter\Input */
+        $input = $di->get('Zend\InputFilter\Input', array('name'=>'type'))
+                    ->setRequired(true)
+                    ->setAllowEmpty(false);
+
+        $input->getValidatorChain()->attach($di->get('Zend\Validator\Digits'));
+        $this->add($input);
+
         $this->translate = $translator;
 
         $this->setData($requestExtractor->extract($request));
@@ -95,6 +111,22 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
     public function getTitle()
     {
         return $this->getValue('title');
+    }
+
+    /**
+     * @return number
+     */
+    public function getType()
+    {
+        return $this->getValue('type');
+    }
+
+    /**
+     * @return array
+     */
+    public function getTags()
+    {
+        return $this->getValue('tags[]');
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 namespace HcbBlog\Stdlib\Extractor\Posts\Post\Data;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Zf2Libs\Stdlib\Extractor\ExtractorInterface;
 use Zf2Libs\Stdlib\Extractor\Exception\InvalidArgumentException;
 use HcbBlog\Entity\Post\Data as PostDataEntity;
@@ -14,11 +15,19 @@ class Extractor implements ExtractorInterface
     protected $pageExtractor;
 
     /**
-     * @param PageExtractor $pageExtractor
+     * @var EntityManagerInterface
      */
-    public function __construct(PageExtractor $pageExtractor)
+    protected $entityManager;
+
+    /**
+     * @param PageExtractor $pageExtractor
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(PageExtractor $pageExtractor,
+                                EntityManagerInterface $entityManager)
     {
         $this->pageExtractor = $pageExtractor;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -44,14 +53,25 @@ class Extractor implements ExtractorInterface
             $updatedTimestamp = $updatedTimestamp->format('Y-m-d H:i:s');
         }
 
+        $allTags = $this->entityManager
+                        ->getRepository( 'HcbBlogTag\Entity\Tag' )
+                        ->createQueryBuilder( 't' )
+                        ->select()
+                        ->join( 't.post', 'p' )
+                        ->where( 'p = :post' )
+                        ->setParameter( 'post', $postData->getPost() )
+                        ->getQuery()->getResult();
 
+        $tags = array();
+        foreach ($allTags as $tagEntity) {
+            $tags[] = (string)$tagEntity->getId();
+        }
 
         $localData =array('id'=>$postData->getId(),
                           'title'=>$postData->getTitle(),
-                          'type' => array(
-                              'article', 'news'
-                          ),
                           'lang'=>$postData->getLang(),
+                          'type'=>$postData->getPost()->getType()->getId(),
+                          'tags[]'=>$tags,
                           'preview'=>$postData->getPreview(),
                           'content'=>$postData->getContent(),
                           'createdTimestamp'=>$createdTimestamp,

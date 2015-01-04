@@ -78,7 +78,7 @@ class Data implements EntityInterface, ImageBindInterface, PageBindInterface
     /**
      * @var \Doctrine\Common\Collections\Collection
      *
-     * @ORM\ManyToMany(targetEntity="HcBackend\Entity\Image")
+     * @ORM\ManyToMany(targetEntity="HcBackend\Entity\Image", cascade={"persist"})
      * @ORM\JoinTable(name="post_data_image",
      *   joinColumns={
      *     @ORM\JoinColumn(name="post_data_id", referencedColumnName="id")

@@ -1,12 +1,11 @@
 <?php
 namespace HcbBlog\Service\Posts\Post\Data;
 
-use HcBackend\Service\PageBinderServiceInterface;
-use HcBackend\Service\ImageBinderServiceInterface;
 use HcbBlog\Data\Posts\Post\Data\SaveInterface;
 use HcbBlog\Entity\Post;
 use Doctrine\ORM\EntityManager;
 use HcbBlog\Stdlib\Service\Response\Posts\Post\CreateResponse;
+use Zf2Libs\Stdlib\Service\ResponseInterface;
 
 class CreateService
 {
@@ -21,36 +20,28 @@ class CreateService
     protected $createResponse;
 
     /**
-     * @var PageBinderServiceInterface
+     * @var SaveService
      */
-    protected $pageBinderService;
-
-    /**
-     * @var ImageBinderServiceInterface
-     */
-    protected $imageBinderService;
+    protected $saveService;
 
     /**
      * @param EntityManager $entityManager
-     * @param PageBinderServiceInterface $pageBinderService
-     * @param ImageBinderServiceInterface $imageBinderService
+     * @param SaveService $saveService
      * @param CreateResponse $saveResponse
      */
     public function __construct(EntityManager $entityManager,
-                                PageBinderServiceInterface $pageBinderService,
-                                ImageBinderServiceInterface $imageBinderService,
+                                SaveService $saveService,
                                 CreateResponse $saveResponse)
     {
-        $this->pageBinderService = $pageBinderService;
-        $this->imageBinderService = $imageBinderService;
         $this->entityManager = $entityManager;
         $this->createResponse = $saveResponse;
+        $this->saveService = $saveService;
     }
 
     /**
      * @param Post $postEntity
      * @param SaveInterface $createData
-     * @return CreateResponse
+     * @return ResponseInterface
      */
     public function save(Post $postEntity, SaveInterface $createData)
     {
@@ -63,28 +54,15 @@ class CreateService
             $postDataEntity->setPost($postEntity);
             $postDataEntity->setLang($createData->getLang());
 
-            $this->imageBinderService->bind($createData, $postDataEntity);
-            $this->pageBinderService->bind($createData, $postDataEntity);
-
-            $this->entityManager->persist($postDataEntity);
-
-            $title = $createData->getTitle();
-
-            if (preg_match('/^news/', $title)) {
-                $title = str_replace('news', '', $title);
-                $postEntity->setType($this->entityManager->getReference('HcbBlog\Entity\Post\Type', 1));
-            } else {
-                $postEntity->setType($this->entityManager->getReference('HcbBlog\Entity\Post\Type', 2));
+            $response = $this->saveService->save($postDataEntity, $createData);
+            if ($response->isFailed()) {
+                return $response;
             }
 
-            $postDataEntity->setTitle($title);
-            $postDataEntity->setPreview($createData->getPreview());
-            $postDataEntity->setContent($createData->getContent());
-
+            $this->entityManager->persist($postDataEntity);
             $this->entityManager->flush();
 
             $this->createResponse->setPostId($postDataEntity->getId());
-
             $this->entityManager->commit();
         } catch (\Exception $e) {
             $this->entityManager->rollback();

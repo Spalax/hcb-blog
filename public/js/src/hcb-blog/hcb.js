@@ -9,15 +9,6 @@ define([
         // summary:
         //      Clients package will provide user to manage web site clients
         title: translation['packageTitle'],
-        iconClass: 'blogIcon',
-
-        postCreate: function () {
-            try {
-                this.inherited(arguments);
-            } catch (e) {
-                 console.error(this.declaredClass, arguments, e);
-                 throw e;
-            }
-        }
+        iconClass: 'blogIcon'
     });
 });

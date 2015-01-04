@@ -1,21 +1,21 @@
 define([], function() {
     return {
-        "route": "/blog/posts",
+        "route": "/blog",
         "prio": 3,
         "modules": [{
             "route": "",
-            "module": "posts/list/Container"
+            "module": "list/Container"
         }, {
             "route": "/create",
             "subRoutes": {
                           "/:lang": function (evt) { this.getInstance().selectLanguageTab(evt.params.lang); },
                           "": function () { this.getInstance().selectLanguageTab(); }},
-            "module": "posts/create/Container"
+            "module": "create/Container"
         }, {
             "route": "/update/:id",
             "subRoutes": {"/:lang": function (evt) { this.getInstance().selectLanguageTab(evt.params.lang); },
                           "": function () { this.getInstance().selectLanguageTab(); }},
-            "module": "posts/update/Container"
+            "module": "update/Container"
         }]
     };
 });

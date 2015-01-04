@@ -3,8 +3,9 @@ namespace HcbBlog\Data\Posts\Post\Data;
 
 use HcBackend\Data\ImageInterface;
 use HcBackend\Data\PageInterface;
+use HcbBlogTag\Data\TagInterface;
 
-interface SaveInterface extends PageInterface, ImageInterface
+interface SaveInterface extends PageInterface, ImageInterface, TagInterface
 {
     /**
      * @return string
@@ -20,6 +21,11 @@ interface SaveInterface extends PageInterface, ImageInterface
      * @return string
      */
     public function getPreview();
+
+    /**
+     * @return number
+     */
+    public function getType();
 
     /**
      * @return string

@@ -1,6 +1,7 @@
 <?php
 namespace HcbBlog\Entity;
 
+use HcbBlog\Entity\Post\IdentifierInterface;
 use HcbBlog\Entity\Post\Type;
 use HcCore\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,7 +13,7 @@ use HcbBlog\Entity\Post\Data;
  * @ORM\Table(name="post")
  * @ORM\Entity
  */
-class Post implements EntityInterface
+class Post implements EntityInterface, IdentifierInterface
 {
     /**
      * @var integer
