@@ -7,5 +7,6 @@ return array(
     'HcbBlog-Controller-Posts-Post-Data-Create',
     'HcbBlog-Controller-Posts-Post-Data-List',
     'HcbBlog-Controller-Posts-Post-Data-Image-Create',
+    'HcbBlog-Controller-Posts-Post-Data-Thumbnail-List',
     'HcbBlog-Controller-Posts-Type-List'
 );

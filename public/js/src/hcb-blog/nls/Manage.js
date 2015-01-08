@@ -35,6 +35,6 @@ define({ root:
         previewHelp: "Text will be displayed as preview of current entry"
     })
 //end v1.x content
-/*    ,
-    "ru": true */
+    ,
+    "ru": true
 });

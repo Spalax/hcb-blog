@@ -58,9 +58,16 @@ return array(
 
     'HcbBlog-Controller-Posts-Post-Data-Image-Create' => array(
         'parameters' => array(
-            'saveService' => 'HcBackend-Images-Default-SaveService',
+            'saveService' => 'HcBackend-Service-Image-SaveService',
             'uploaderModel' => 'HcbBlog-Posts-Post-Data-Image-UploaderModel',
             'createResourceData' => 'HcbBlog-Posts-Post-Image-CreateResourceData'
+        )
+    ),
+
+    // Product Thumbnail
+    'HcbBlog-Controller-Posts-Post-Data-Thumbnail-List' => array(
+        'parameters' => array(
+            'fetchService' => 'HcbBlog-Posts-Post-FetchService'
         )
     ),
 );

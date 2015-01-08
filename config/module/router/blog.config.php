@@ -40,6 +40,25 @@ return array(
                     ),
                     'may_terminate' => false,
                     'child_routes' => array(
+                        'thumbnail' => array(
+                            'type' => 'literal',
+                            'options' => array(
+                                'route' => '/thumbnail'
+                            ),
+                            'may_terminate' => false,
+                            'child_routes' => array (
+                                'list' => array(
+                                    'type' => 'method',
+                                    'options' => array(
+                                        'verb' => 'get',
+                                        'defaults' => array(
+                                            'controller' =>
+                                                'HcbBlog-Controller-Posts-Post-Data-Thumbnail-List'
+                                        )
+                                    )
+                                )
+                            )
+                        ),
                         'list' => array(
                             'type' => 'method',
                             'options' => array(

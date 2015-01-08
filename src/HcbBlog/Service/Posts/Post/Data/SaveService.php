@@ -74,6 +74,16 @@ class SaveService
 
             $this->entityManager->persist($postDataEntity);
 
+            if ($saveData->getThumbnail()) {
+                /* @var \HcbBlog\Entity\Post\Data\Image $dataImage */
+                foreach ( $postDataEntity->getDataImage() as $dataImage ) {
+                    if ( $saveData->getThumbnail()->getToken() === $dataImage->getImage()->getToken() ) {
+                        $dataImage->setIsPreview( true );
+                        break;
+                    }
+                }
+            }
+
             $title = $saveData->getTitle();
 
             $postEntity->setType($this->entityManager

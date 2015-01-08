@@ -5,21 +5,20 @@ return array(
     'HcbBlog-Controller-Posts-Delete' => 'HcCore\Controller\Common\Rest\Collection\DataController',
     'HcbBlog-Controller-Posts-Post-Create' => 'HcCore\Controller\Common\Rest\Collection\DataController',
     'HcbBlog-Controller-Posts-Post-Data-Save' => 'HcCore\Controller\Common\Rest\Collection\ResourceDataController',
-    'HcbBlog-Controller-Posts-Post-Data-Create' =>
-        'HcCore\Controller\Common\Rest\Collection\ResourceDataController',
+    'HcbBlog-Controller-Posts-Post-Data-Create' => 'HcCore\Controller\Common\Rest\Collection\ResourceDataController',
     'HcbBlog-Controller-Posts-Post-Data-List' => 'HcCore\Controller\Common\Rest\Collection\ResourceListController',
-    'HcbBlog-Controller-Posts-Post-Data-Image-Create' =>
-        'HcbBlog\Controller\Images\CreateController',
+    'HcbBlog-Controller-Posts-Post-Data-Image-Create' => 'Zf2FileUploader\Controller\Images\CreateController',
+    'HcbBlog-Controller-Posts-Post-Data-Thumbnail-List' => 'HcbBlog\Controller\Thumbnail\ListController',
     'HcbBlog-Controller-Posts-Type-List' => 'HcCore\Controller\Common\Rest\Collection\ListController',
 
     //Common
     'HcbBlog-Posts-PaginatorViewModel' => 'Zf2Libs\Paginator\ViewModel\JsonModel',
     'HcbBlog-Posts-Post-Data-PaginatorViewModel' => 'Zf2Libs\Paginator\ViewModel\JsonModel',
     'HcbBlog-Posts-Post-Type-PaginatorViewModel' => 'Zf2Libs\Paginator\ViewModel\JsonModel',
-    'HcbBlog-Posts-Post-Data-InputLoadResourceInput-Preview' =>
-        'Zf2FileUploader\Input\Image\LoadResource\FromText',
-    'HcbBlog-Posts-Post-Data-InputLoadResourceInput-Content' =>
-        'Zf2FileUploader\Input\Image\LoadResource\FromText',
+    'HcbBlog-Posts-Post-Data-InputLoadResourceInput-Preview' => 'Zf2FileUploader\Input\Image\LoadResource\FromText',
+    'HcbBlog-Posts-Post-Data-InputLoadResourceInput-Content' => 'Zf2FileUploader\Input\Image\LoadResource\FromText',
+    'HcbBlog-Posts-Post-Data-InputCreateResourceInput-Thumbnail' =>
+        'Zf2FileUploader\Input\Image\LoadResource\FromList',
     'HcbBlog-Posts-Post-Data-ImagesSaveService' => 'Zf2FileUploader\Service\Image\SaveService',
 
     'HcbBlog-Posts-Post-FetchService' => 'HcCore\Service\FetchService',

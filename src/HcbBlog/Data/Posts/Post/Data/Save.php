@@ -44,6 +44,7 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
                                 Translator $translator,
                                 LoadResourceInputInterface $resourceInputPreviewLoader,
                                 LoadResourceInputInterface $resourceInputContentLoader,
+                                LoadResourceInputInterface $resourceInputThumbnailLoader,
                                 Di $di)
     {
         parent::__construct($di);
@@ -66,10 +67,17 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
 
         $this->resourceInputPreviewLoader = $resourceInputPreviewLoader;
         $resourceInputPreviewLoader->setAllowEmpty(true);
+        $resourceInputPreviewLoader->setRequired(false);
         $this->add($resourceInputPreviewLoader);
+
+        $this->resourceInputThumbnailLoader = $resourceInputThumbnailLoader;
+        $resourceInputThumbnailLoader->setAllowEmpty(true);
+        $resourceInputThumbnailLoader->setRequired(false);
+        $this->add($resourceInputThumbnailLoader);
 
         $this->resourceInputContentLoader = $resourceInputContentLoader;
         $resourceInputContentLoader->setAllowEmpty(true);
+        $resourceInputContentLoader->setRequired(false);
         $this->add($resourceInputContentLoader);
 
         /* @var $input \Zend\InputFilter\Input */
@@ -159,7 +167,16 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
     public function getResources()
     {
         return array_merge($this->resourceInputPreviewLoader->getResources(),
-                           $this->resourceInputContentLoader->getResources());
+                           $this->resourceInputContentLoader->getResources(),
+                           $this->resourceInputThumbnailLoader->getResources());
+    }
+
+    /**
+     * @return \Zf2FileUploader\Resource\ImageResourceInterface
+     */
+    public function getThumbnail()
+    {
+        return current($this->resourceInputThumbnailLoader->getResources());
     }
 
     /**

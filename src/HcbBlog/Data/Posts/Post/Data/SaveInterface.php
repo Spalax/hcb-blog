@@ -23,6 +23,11 @@ interface SaveInterface extends PageInterface, ImageInterface, TagInterface
     public function getPreview();
 
     /**
+     * @return \Zf2FileUploader\Resource\ImageResourceInterface
+     */
+    public function getThumbnail();
+
+    /**
      * @return number
      */
     public function getType();

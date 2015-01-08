@@ -23,6 +23,15 @@
     </div>
 
     <div class="row">
+        ${!_t.thumbnailLabel}<br/>
+        <div data-dojo-type="hc-backend/form/FileInputList"
+             style="width: 265px;"
+             data-dojo-props="service: '${thumbnailServiceUrl}',
+                              name: 'thumbnail',
+                              saveMultiImage: false"></div>
+    </div>
+
+    <div class="row">
         ${!_t.tagsLabel}
         <div data-dojo-attach-point="tagsWidget"></div>
     </div>
@@ -64,20 +73,22 @@
     <div class="row">
         ${!_t.previewLabel}
         <div class="${baseClass}Editor"
-             data-dojo-type="dojo-ckeditor/Editor"
+             data-dojo-type="hc-backend/Editor"
              data-dojo-attach-point="previewEditorWidget"
              data-dojo-props='name:"preview",
-                              settings:{filebrowserUploadUrl: "${filebrowserUploadUrl}"}'></div>
+                              uploadable: true,
+                              settings: {allowedContent: true}'></div>
         <div class="field-description">${!_t.previewHelp}</div>
     </div>
 
     <div class="row">
         ${!_t.contentLabel}
         <div class="${baseClass}Editor"
-             data-dojo-type="dojo-ckeditor/Editor"
+             data-dojo-type="hc-backend/Editor"
              data-dojo-attach-point="contentEditorWidget"
              data-dojo-props='name:"content",
-                              settings: {filebrowserUploadUrl: "${filebrowserUploadUrl}"}'></div>
+                              uploadable: true,
+                              settings: {allowedContent: true}'></div>
         <div class="field-description">${!_t.contentHelp}</div>
     </div>
 

@@ -17,7 +17,8 @@ define([
     "dijit/form/Textarea",
     "dojo-common/form/BusyButton",
     "dijit/form/ValidationTextBox",
-    "dojo-ckeditor/Editor"
+    "hc-backend/form/FileInputList",
+    "hc-backend/Editor"
 ], function(declare, array, lang, config, DeferredList, Memory, Form,
             _HasPageFieldsMixin, _WidgetsInTemplateMixin,
             template, translation, FilteringSelect,
@@ -28,6 +29,7 @@ define([
         //      Form widget for adding page to the CMS database
 
         filebrowserUploadUrl: '',
+        thumbnailServiceUrl: '',
 
         templateString: template,
 
@@ -37,7 +39,10 @@ define([
 
         postMixInProperties: function () {
             try {
-                this.filebrowserUploadUrl = config.get('primaryRoute')+'/blog/posts/images';
+                this.thumbnailServiceUrl = config.get('primaryRoute') +
+                                           '/blog/' +
+                                           this.saveService.identifier +
+                                           '/localized/thumbnail?lang='+this.lang;
                 this.inherited(arguments);
             } catch (e) {
                  console.error(this.declaredClass, arguments, e);

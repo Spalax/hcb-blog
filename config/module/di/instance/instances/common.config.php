@@ -9,7 +9,8 @@ return array(
     'HcbBlog\Data\Posts\Post\Data\Save' => array(
         'parameters' => array(
             'resourceInputPreviewLoader' => 'HcbBlog-Posts-Post-Data-InputLoadResourceInput-Preview',
-            'resourceInputContentLoader' => 'HcbBlog-Posts-Post-Data-InputLoadResourceInput-Content'
+            'resourceInputContentLoader' => 'HcbBlog-Posts-Post-Data-InputLoadResourceInput-Content',
+            'resourceInputThumbnailLoader' => 'HcbBlog-Posts-Post-Data-InputCreateResourceInput-Thumbnail'
         )
     ),
 
@@ -19,6 +20,10 @@ return array(
 
     'HcbBlog-Posts-Post-Data-InputLoadResourceInput-Content' => array(
         'parameters' => array( 'name' => 'content' )
+    ),
+
+    'HcbBlog-Posts-Post-Data-InputCreateResourceInput-Thumbnail' => array(
+        'parameters' => array( 'name' => 'thumbnail' )
     ),
 
     'HcbBlog-Posts-Post-Data-PaginatorViewModel' => array(
