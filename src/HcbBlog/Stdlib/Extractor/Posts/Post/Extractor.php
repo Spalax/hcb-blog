@@ -40,6 +40,8 @@ class Extractor implements ExtractorInterface
             $dataEntity = $filtrated->current();
         }
 
+
+
         return array('id'=>$post->getId(),
                      'title'=>$dataEntity->getTitle(),
                      'createdTimestamp'=>$createdTimestamp);

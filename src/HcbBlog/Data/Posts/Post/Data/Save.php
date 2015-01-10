@@ -2,15 +2,15 @@
 namespace HcbBlog\Data\Posts\Post\Data;
 
 use HcCore\Data\DataMessagesInterface;
-use HcBackend\Data\Page;
 use Zf2FileUploader\Resource\Persisted\ImageResourceInterface;
 use HcCore\Stdlib\Extractor\Request\Payload\Extractor;
 use Zend\Di\Di;
 use Zend\Http\PhpEnvironment\Request;
 use Zend\I18n\Translator\Translator;
+use HcCore\InputFilter\InputFilter;
 use Zf2FileUploader\Input\Image\LoadResourceInterface as LoadResourceInputInterface;
 
-class Save extends Page implements SaveInterface, DataMessagesInterface
+class Save extends InputFilter implements SaveInterface, DataMessagesInterface
 {
     /**
      * @var Translator
@@ -47,8 +47,6 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
                                 LoadResourceInputInterface $resourceInputThumbnailLoader,
                                 Di $di)
     {
-        parent::__construct($di);
-
         /* @var $input \Zend\InputFilter\Input */
         $input = $di->get('Zend\InputFilter\Input', array('name'=>'title'));
         $input->setRequired(true);
@@ -58,6 +56,8 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
 
         $input->getFilterChain()->attach($di->get('Zend\Filter\StringTrim'));
         $this->add($input);
+
+        $this->add(array('type'=>'HcBackend\InputFilter\Page'), 'page');
 
         /* @var $input \HcBackend\InputFilter\Input\Locale */
         $input = $di->get('HcBackend\InputFilter\Input\Locale',
@@ -177,6 +177,38 @@ class Save extends Page implements SaveInterface, DataMessagesInterface
     public function getThumbnail()
     {
         return current($this->resourceInputThumbnailLoader->getResources());
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        return $this->getValue('page')['pageDescription'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaKeywords()
+    {
+        return $this->getValue('page')['pageKeywords'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaTitle()
+    {
+        return $this->getValue('page')['pageTitle'];
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->getValue('page')['pageUrl'];
     }
 
     /**
