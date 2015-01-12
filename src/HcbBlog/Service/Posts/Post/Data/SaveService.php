@@ -74,10 +74,12 @@ class SaveService
 
             $this->entityManager->persist($postDataEntity);
 
-            if ($saveData->getThumbnail()) {
+            $thumbnail = $saveData->getThumbnail();
+
+            if ($thumbnail) {
                 /* @var \HcbBlog\Entity\Post\Data\Image $dataImage */
-                foreach ( $postDataEntity->getDataImage() as $dataImage ) {
-                    if ( $saveData->getThumbnail()->getToken() === $dataImage->getImage()->getToken() ) {
+                foreach ($postDataEntity->getDataImage() as $dataImage ) {
+                    if ( $thumbnail->getToken() === $dataImage->getImage()->getToken() ) {
                         $dataImage->setIsPreview( true );
                         break;
                     }
